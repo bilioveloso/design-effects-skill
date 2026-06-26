@@ -53,7 +53,7 @@ trigger_keywords:
   - enterprise dashboard
   - /design-effects-skill
 author: bilioveloso
-version: "3.1"
+version: "3.2"
 ---
 
 # Design Effects Skill
@@ -66,8 +66,9 @@ This skill teaches an agent to make strong, deliberate design-effect decisions �
 3. Use the Decision Guide to fill in any gaps or custom needs.
 4. Pick the lightest effect that achieves the visual goal.
 5. Apply the minimal code snippet as a starting point.
-6. Cross-reference color-combo-skill for palette pairing.
+6. Cross-reference [color-combo-skill](https://github.com/bilioveloso/color-combo-skill) for palette pairing.
 7. Check accessibility, dark mode, and reduced-motion behavior before shipping.
+8. For components not covered here, browse [React Bits](https://www.reactbits.dev/get-started/index) — an open source collection of animated, interactive, and fully customizable React components. Install only the specific component you need. Credit the source when adapting their work.
 
 ## Core Rules
 - **Never add effects for the sake of effects.** Every animation or visual style must serve atmosphere, feedback, hierarchy, or focus.
@@ -86,6 +87,8 @@ This skill teaches an agent to make strong, deliberate design-effect decisions �
 Each recipe is a complete, opinionated effect stack for a specific project archetype. Use these directly — don't mix stacks between archetypes.
 
 > **Agent rule:** When a project clearly matches one of these archetypes, apply this recipe as the starting point. Only deviate when the brief explicitly calls for it.
+
+> **React Bits:** This skill covers the most decision-critical components. For the full catalog of animated, interactive, and customizable React components — including variants not listed here — browse [React Bits](https://www.reactbits.dev/get-started/index). Install only the specific component you need via their CLI or manual copy method. Always credit the source when adapting their work.
 
 ---
 
@@ -107,6 +110,8 @@ Each recipe is a complete, opinionated effect stack for a specific project arche
 | Mobile fallback | Static gradient background | Disable ShaderGradient on `max-width: 768px` |
 
 **Palette:** Otherworldly, Dreamy Periwinkle, or Silver Pulse from color-combo-skill.
+**Font stack:** Plus Jakarta Sans + Inter — see [font-pairing-skill](https://github.com/bilioveloso/font-pairing-skill).
+**Icon stack:** Phosphor Regular or Lucide — see [icon-system-skill](https://github.com/bilioveloso/icon-system-skill).
 
 **Never use in this archetype:** Claymorphism, Brutalism, Ballpit, Hyperspeed, custom cursor on product pages.
 
@@ -130,6 +135,8 @@ Each recipe is a complete, opinionated effect stack for a specific project arche
 | Mobile fallback | Particles → static dark gradient with grain | Disable Hyperspeed on mobile unconditionally |
 
 **Palette:** Gaming / Esports (Midnight Frag, Neon Abyss) or Acid Contemporary from color-combo-skill.
+**Font stack:** Bebas Neue + Inter — see [font-pairing-skill](https://github.com/bilioveloso/font-pairing-skill).
+**Icon stack:** Phosphor Bold or custom SVG — see [icon-system-skill](https://github.com/bilioveloso/icon-system-skill).
 
 **Never use in this archetype:** Neumorphism, Claymorphism, soft Aurora, wellness colors, serif fonts.
 
@@ -153,6 +160,8 @@ Each recipe is a complete, opinionated effect stack for a specific project arche
 | Motion timing | Ease-out, 250–400ms, never under 180ms | Slow timing = calm = trusted |
 
 **Palette:** Nature / Organic (Eucalyptus Glow), Healthcare (Clinical Clarity, Vital Green), or Soft Gradients from color-combo-skill.
+**Font stack:** Lora + DM Sans — see [font-pairing-skill](https://github.com/bilioveloso/font-pairing-skill).
+**Icon stack:** Phosphor Light or Regular — see [icon-system-skill](https://github.com/bilioveloso/icon-system-skill).
 
 **Never use in this archetype:** GlitchText, Hyperspeed, Ballpit, Brutalism, Neumorphism, neon borders.
 
@@ -176,6 +185,8 @@ Each recipe is a complete, opinionated effect stack for a specific project arche
 | Motion timing | Sharp easing (120–200ms) | Tool-like tempo |
 
 **Palette:** Acid Contemporary, Minimalist (Bone & Carbon), or Corporate (Steel Authority) from color-combo-skill.
+**Font stack:** Space Grotesk + Geist + JetBrains Mono — see [font-pairing-skill](https://github.com/bilioveloso/font-pairing-skill).
+**Icon stack:** Lucide or Heroicons Outline — see [icon-system-skill](https://github.com/bilioveloso/icon-system-skill).
 
 **Never use in this archetype:** Ballpit, Hyperspeed, Claymorphism, heavy 3D, Aurora, Waves.
 
@@ -199,6 +210,8 @@ Each recipe is a complete, opinionated effect stack for a specific project arche
 | Motion timing | Premium ease cubic-bezier(0.22, 1, 0.36, 1), 400–600ms | Slower and more deliberate = premium craft |
 
 **Palette:** Any — but pick one and commit. Luxury, Gothic / Dark Romance, and Acid Contemporary all work at this tier.
+**Font stack:** Clash Display + Manrope — see [font-pairing-skill](https://github.com/bilioveloso/font-pairing-skill).
+**Icon stack:** Minimal or custom only — see [icon-system-skill](https://github.com/bilioveloso/icon-system-skill).
 
 **Never use in this archetype:** Skeleton loaders, enterprise grids, standard button libraries, default browser cursors on desktop.
 
@@ -222,6 +235,8 @@ Each recipe is a complete, opinionated effect stack for a specific project arche
 | Motion timing | Spring (medium stiffness, medium damping) + ease-out | Approachable and bouncy, not corporate |
 
 **Palette:** Warm Tropical / Resort, Soft Gradients (Peach Champagne, Dreamy Periwinkle), or Luxury Facade from color-combo-skill.
+**Font stack:** Cabinet Grotesk + Nunito — see [font-pairing-skill](https://github.com/bilioveloso/font-pairing-skill).
+**Icon stack:** Phosphor Regular or Duotone — see [icon-system-skill](https://github.com/bilioveloso/icon-system-skill).
 
 **Never use in this archetype:** Brutalism, heavy 3D, GlitchText, dark glass, enterprise grids.
 
@@ -245,6 +260,8 @@ Each recipe is a complete, opinionated effect stack for a specific project arche
 | Motion timing | Premium ease, 400–700ms, always ease-out | Long, deliberate, cinematic |
 
 **Palette:** Gothic / Dark Romance (Velvet Crypt, Blood Amber), Luxury, or Minimalist (Bone & Carbon) from color-combo-skill.
+**Font stack:** Playfair Display + Lora — see [font-pairing-skill](https://github.com/bilioveloso/font-pairing-skill).
+**Icon stack:** Minimal or none — see [icon-system-skill](https://github.com/bilioveloso/icon-system-skill).
 
 **Never use in this archetype:** Claymorphism, Ballpit, Particles, CountUp, Hyperspeed, Marquee.
 
@@ -268,6 +285,8 @@ Each recipe is a complete, opinionated effect stack for a specific project arche
 | Motion timing | Soft ease-out (200–280ms) — purposeful but invisible | Motion should never be the thing users notice |
 
 **Palette:** Corporate / Enterprise (Steel Authority, Slate Command), Minimalist, or Soft Gradients (light mode) from color-combo-skill.
+**Font stack:** Inter + IBM Plex Mono — see [font-pairing-skill](https://github.com/bilioveloso/font-pairing-skill).
+**Icon stack:** Lucide or Heroicons Outline — see [icon-system-skill](https://github.com/bilioveloso/icon-system-skill).
 
 **Never use in this archetype:** ShaderGradient in UI shell, Hyperspeed, Ballpit, Claymorphism, custom cursors, Brutalism, heavy text animations.
 
@@ -911,6 +930,19 @@ export function Hero3D() {
 ```tsx
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 ```
+
+---
+
+## Skill Network
+
+This skill is part of a four-skill design system. Each skill cross-references the others:
+
+| Skill | What it covers | Repo |
+|---|---|---|
+| **color-combo-skill** | Named palettes, contrast tiers, CSS usage | [github.com/bilioveloso/color-combo-skill](https://github.com/bilioveloso/color-combo-skill) |
+| **design-effects-skill** | Animations, morphisms, motion patterns, page recipes | *This skill* |
+| **font-pairing-skill** | Typeface selection, pairing rules, type scale | [github.com/bilioveloso/font-pairing-skill](https://github.com/bilioveloso/font-pairing-skill) |
+| **icon-system-skill** | Icon library selection, sizing, weight, animated icons | [github.com/bilioveloso/icon-system-skill](https://github.com/bilioveloso/icon-system-skill) |
 
 ---
 
