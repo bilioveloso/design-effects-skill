@@ -1,0 +1,278 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="480" viewBox="0 0 1200 480">
+  <defs>
+    <style>
+      @keyframes gradShift {
+        0%   { stop-color: #f472b6; }
+        33%  { stop-color: #fb923c; }
+        66%  { stop-color: #facc15; }
+        100% { stop-color: #f472b6; }
+      }
+      @keyframes shimmer {
+        0%   { x: -300px; }
+        100% { x: 700px; }
+      }
+      @keyframes blob1 {
+        0%,100% { transform: translate(0px,0px) scale(1); }
+        50%     { transform: translate(18px,12px) scale(1.25); }
+      }
+      @keyframes blob2 {
+        0%,100% { transform: translate(0px,0px) scale(1.1); }
+        50%     { transform: translate(-14px,16px) scale(0.85); }
+      }
+      @keyframes blob3 {
+        0%,100% { transform: translate(0px,0px) scale(0.9); }
+        50%     { transform: translate(-18px,-10px) scale(1.2); }
+      }
+      @keyframes wordReveal {
+        0%   { opacity:0; filter:blur(8px); }
+        100% { opacity:1; filter:blur(0px); }
+      }
+      @keyframes charUp {
+        0%   { opacity:0; transform: translateY(18px); }
+        100% { opacity:1; transform: translateY(0); }
+      }
+      @keyframes fadeBar {
+        0%   { opacity:0; transform: translateX(-8px); }
+        100% { opacity:1; transform: translateX(0); }
+      }
+      @keyframes glitchMain {
+        0%,88%,100% { transform:none; opacity:1; }
+        90%  { transform:skewX(-3deg); }
+        92%  { transform:skewX(3deg); }
+        94%  { transform:none; }
+      }
+      @keyframes glitchR {
+        0%,88%,100% { opacity:0; }
+        90%,92%     { opacity:1; }
+      }
+      @keyframes glitchB {
+        0%,90%,100% { opacity:0; }
+        92%,94%     { opacity:1; }
+      }
+      @keyframes rotWord {
+        0%,28%  { transform: translateY(0); }
+        33%,61% { transform: translateY(-24px); }
+        66%,94% { transform: translateY(-48px); }
+        99%,100%{ transform: translateY(0); }
+      }
+      @keyframes glassBlob {
+        0%,100% { transform: translate(0,0); }
+        50%     { transform: translate(16px,12px); }
+      }
+      .glass-blob { animation: glassBlob 5s ease-in-out infinite; transform-origin: 50% 50%; }
+      .blob1 { animation: blob1 6s ease-in-out infinite; transform-origin: 50% 50%; }
+      .blob2 { animation: blob2 8s ease-in-out infinite; transform-origin: 50% 50%; }
+      .blob3 { animation: blob3 7s ease-in-out infinite; transform-origin: 50% 50%; }
+      .w1 { animation: wordReveal 0.6s ease 0.3s both; }
+      .w2 { animation: wordReveal 0.6s ease 0.8s both; }
+      .w3 { animation: wordReveal 0.6s ease 1.3s both; }
+      .w4 { animation: wordReveal 0.6s ease 1.8s both; }
+      .c1 { animation: charUp 0.4s cubic-bezier(.22,1,.36,1) 0.1s both; }
+      .c2 { animation: charUp 0.4s cubic-bezier(.22,1,.36,1) 0.2s both; }
+      .c3 { animation: charUp 0.4s cubic-bezier(.22,1,.36,1) 0.3s both; }
+      .c4 { animation: charUp 0.4s cubic-bezier(.22,1,.36,1) 0.4s both; }
+      .c5 { animation: charUp 0.4s cubic-bezier(.22,1,.36,1) 0.5s both; }
+      .c6 { animation: charUp 0.4s cubic-bezier(.22,1,.36,1) 0.6s both; }
+      .fb1 { animation: fadeBar 0.7s ease 0.4s both; }
+      .fb2 { animation: fadeBar 0.7s ease 0.8s both; }
+      .fb3 { animation: fadeBar 0.7s ease 1.2s both; }
+      .fb4 { animation: fadeBar 0.7s ease 1.6s both; }
+      .glitch-main { animation: glitchMain 4s steps(1) infinite; }
+      .glitch-r    { animation: glitchR 4s steps(1) infinite; opacity:0; }
+      .glitch-b    { animation: glitchB 4s steps(1) infinite 0.08s; opacity:0; }
+      .rot-words   { animation: rotWord 3.6s steps(1) infinite; }
+    </style>
+    <linearGradient id="heroGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"><animate attributeName="stop-color" values="#6c7aff;#c084fc;#38bdf8;#6c7aff" dur="4s" repeatCount="indefinite"/></stop>
+      <stop offset="100%"><animate attributeName="stop-color" values="#c084fc;#38bdf8;#6c7aff;#c084fc" dur="4s" repeatCount="indefinite"/></stop>
+    </linearGradient>
+    <linearGradient id="textGrad" x1="0" y1="0" x2="300" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"><animate attributeName="stop-color" values="#f472b6;#fb923c;#facc15;#f472b6" dur="3s" repeatCount="indefinite"/></stop>
+      <stop offset="100%"><animate attributeName="stop-color" values="#facc15;#f472b6;#fb923c;#facc15" dur="3s" repeatCount="indefinite"/></stop>
+    </linearGradient>
+    <linearGradient id="shimmerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="transparent"/>
+      <stop offset="40%" stop-color="#f472b6" stop-opacity="0.8"/>
+      <stop offset="60%" stop-color="#fb923c" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </linearGradient>
+    <linearGradient id="skelGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
+      <stop offset="50%" stop-color="rgba(255,255,255,0.14)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </linearGradient>
+    <radialGradient id="aurora1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#6c7aff" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#6c7aff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="aurora2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#c084fc" stop-opacity="0.65"/>
+      <stop offset="100%" stop-color="#c084fc" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="aurora3" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glassGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#6c7aff" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#6c7aff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="bar1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6c7aff"/><stop offset="100%" stop-color="#38bdf8"/>
+    </linearGradient>
+    <linearGradient id="bar2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#c084fc"/><stop offset="100%" stop-color="#f472b6"/>
+    </linearGradient>
+    <linearGradient id="bar3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#34d399"/><stop offset="100%" stop-color="#38bdf8"/>
+    </linearGradient>
+    <clipPath id="glassClip"><rect x="258" y="52" width="206" height="110" rx="10"/></clipPath>
+    <clipPath id="auroraClip"><rect x="496" y="44" width="206" height="118" rx="12"/></clipPath>
+    <clipPath id="skelClip1"><rect x="988" y="80" width="170" height="9" rx="4"/></clipPath>
+    <clipPath id="skelClip2"><rect x="988" y="95" width="130" height="9" rx="4"/></clipPath>
+    <clipPath id="skelClip3"><rect x="988" y="110" width="150" height="9" rx="4"/></clipPath>
+  </defs>
+
+  <!-- BG -->
+  <rect width="1200" height="480" rx="16" fill="#0d0f1a"/>
+  <line x1="242" y1="0" x2="242" y2="480" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <line x1="480" y1="0" x2="480" y2="480" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <line x1="718" y1="0" x2="718" y2="480" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <line x1="956" y1="0" x2="956" y2="480" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+
+  <!-- COL 1 HERO -->
+  <rect x="0" y="0" width="242" height="480" fill="#111327"/>
+  <rect x="0" y="0" width="16" height="480" rx="16" fill="#111327"/>
+  <text x="28" y="56" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#6c7aff" letter-spacing="3">AGENT SKILL</text>
+  <text x="28" y="102" font-family="system-ui,sans-serif" font-size="34" font-weight="900" fill="#ffffff">Design</text>
+  <text x="28" y="142" font-family="system-ui,sans-serif" font-size="34" font-weight="900" fill="url(#heroGrad)">Effects</text>
+  <text x="28" y="182" font-family="system-ui,sans-serif" font-size="34" font-weight="900" fill="#ffffff">Skill</text>
+  <text x="28" y="218" font-family="system-ui,sans-serif" font-size="11" fill="rgba(255,255,255,0.38)">Motion, morphisms &amp; visual</text>
+  <text x="28" y="234" font-family="system-ui,sans-serif" font-size="11" fill="rgba(255,255,255,0.38)">FX recipes for UI &amp; branding.</text>
+  <text x="28" y="292" font-family="system-ui,sans-serif" font-size="28" font-weight="900" fill="#6c7aff">8</text>
+  <text x="52" y="292" font-family="system-ui,sans-serif" font-size="11" fill="rgba(255,255,255,0.3)"> page recipes</text>
+  <text x="28" y="322" font-family="system-ui,sans-serif" font-size="28" font-weight="900" fill="#c084fc">30+</text>
+  <text x="72" y="322" font-family="system-ui,sans-serif" font-size="11" fill="rgba(255,255,255,0.3)"> effects</text>
+  <text x="28" y="350" font-family="system-ui,sans-serif" font-size="28" font-weight="900" fill="#38bdf8">4</text>
+  <text x="52" y="350" font-family="system-ui,sans-serif" font-size="11" fill="rgba(255,255,255,0.3)"> linked skills</text>
+  <text x="28" y="458" font-family="system-ui,sans-serif" font-size="9" fill="rgba(255,255,255,0.18)" letter-spacing="1">bilioveloso / design-effects-skill</text>
+
+  <!-- COL 2 MORPHISMS -->
+  <text x="258" y="34" font-family="system-ui,sans-serif" font-size="9" font-weight="700" fill="rgba(255,255,255,0.25)" letter-spacing="2.5">MORPHISMS</text>
+  <rect x="258" y="44" width="206" height="118" rx="12" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
+  <g class="glass-blob" clip-path="url(#glassClip)">
+    <ellipse cx="290" cy="90" rx="60" ry="50" fill="url(#glassGrad)"/>
+  </g>
+  <text x="274" y="76" font-family="system-ui,sans-serif" font-size="13" font-weight="700" fill="#fff">Glassmorphism</text>
+  <text x="274" y="93" font-family="system-ui,sans-serif" font-size="10" fill="rgba(255,255,255,0.38)">Frosted blur surface</text>
+  <rect x="274" y="130" width="88" height="18" rx="9" fill="rgba(108,122,255,0.15)" stroke="rgba(108,122,255,0.3)" stroke-width="1"/>
+  <text x="318" y="143" font-family="system-ui,sans-serif" font-size="9" font-weight="600" fill="#8b9aff" text-anchor="middle">backdrop-filter</text>
+  <rect x="258" y="176" width="206" height="100" rx="12" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="274" y="200" font-family="system-ui,sans-serif" font-size="9" font-weight="700" fill="rgba(255,255,255,0.25)" letter-spacing="2">GRADIENT TEXT</text>
+  <text x="274" y="232" font-family="system-ui,sans-serif" font-size="26" font-weight="900" fill="url(#textGrad)">VIVID</text>
+  <rect x="274" y="248" width="160" height="3" rx="1.5" fill="rgba(255,255,255,0.06)"/>
+  <rect y="248" width="80" height="3" rx="1.5" fill="url(#shimmerGrad)">
+    <animate attributeName="x" values="258;440" dur="2.2s" repeatCount="indefinite"/>
+  </rect>
+  <rect x="258" y="290" width="206" height="120" rx="12" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="274" y="314" font-family="system-ui,sans-serif" font-size="9" font-weight="700" fill="rgba(255,255,255,0.25)" letter-spacing="2">BLUR TEXT</text>
+  <text class="w1" x="274" y="342" font-family="system-ui,sans-serif" font-size="14" font-weight="600" fill="#fff">Design</text>
+  <text class="w2" x="334" y="342" font-family="system-ui,sans-serif" font-size="14" font-weight="600" fill="#fff">with</text>
+  <text class="w3" x="274" y="366" font-family="system-ui,sans-serif" font-size="14" font-weight="600" fill="#fff">intent.</text>
+  <text class="w4" x="336" y="366" font-family="system-ui,sans-serif" font-size="14" font-weight="600" fill="rgba(255,255,255,0.45)">Motion.</text>
+  <text x="258" y="458" font-family="system-ui,sans-serif" font-size="9" fill="rgba(255,255,255,0.18)" letter-spacing="1">TEXT &amp; OVERLAY</text>
+
+  <!-- COL 3 BACKGROUNDS -->
+  <text x="496" y="34" font-family="system-ui,sans-serif" font-size="9" font-weight="700" fill="rgba(255,255,255,0.25)" letter-spacing="2.5">BACKGROUNDS</text>
+  <rect x="496" y="44" width="206" height="118" rx="12" fill="#0a0d1a" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <g clip-path="url(#auroraClip)">
+    <ellipse class="blob1" cx="536" cy="86" rx="60" ry="45" fill="url(#aurora1)"/>
+    <ellipse class="blob2" cx="582" cy="102" rx="52" ry="40" fill="url(#aurora2)"/>
+    <ellipse class="blob3" cx="626" cy="74" rx="46" ry="38" fill="url(#aurora3)"/>
+  </g>
+  <text x="512" y="74" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="rgba(255,255,255,0.85)">Aurora Effect</text>
+  <text x="512" y="90" font-family="system-ui,sans-serif" font-size="9" fill="rgba(255,255,255,0.4)">Animated light blobs</text>
+  <rect x="496" y="176" width="206" height="100" rx="12" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="512" y="200" font-family="system-ui,sans-serif" font-size="9" font-weight="700" fill="rgba(255,255,255,0.25)" letter-spacing="2">FADE IN</text>
+  <rect class="fb1" x="512" y="212" width="162" height="8" rx="4" fill="rgba(108,122,255,0.4)"/>
+  <rect class="fb2" x="512" y="226" width="124" height="8" rx="4" fill="rgba(192,132,252,0.4)"/>
+  <rect class="fb3" x="512" y="240" width="144" height="8" rx="4" fill="rgba(56,189,248,0.4)"/>
+  <rect class="fb4" x="512" y="254" width="96" height="8" rx="4" fill="rgba(52,211,153,0.3)"/>
+  <rect x="496" y="290" width="206" height="130" rx="12" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="512" y="314" font-family="system-ui,sans-serif" font-size="9" font-weight="700" fill="rgba(255,255,255,0.25)" letter-spacing="2">COUNT UP</text>
+  <text x="512" y="336" font-family="system-ui,sans-serif" font-size="10" fill="rgba(255,255,255,0.35)">Recipes</text>
+  <text x="686" y="336" font-family="system-ui,sans-serif" font-size="16" font-weight="900" fill="#38bdf8" text-anchor="end">8</text>
+  <rect x="512" y="340" width="174" height="3" rx="1.5" fill="rgba(255,255,255,0.06)"/>
+  <rect x="512" y="340" rx="1.5" height="3" fill="url(#bar1)"><animate attributeName="width" values="0;140" dur="2s" fill="freeze"/></rect>
+  <text x="512" y="360" font-family="system-ui,sans-serif" font-size="10" fill="rgba(255,255,255,0.35)">Effects</text>
+  <text x="686" y="360" font-family="system-ui,sans-serif" font-size="16" font-weight="900" fill="#c084fc" text-anchor="end">30+</text>
+  <rect x="512" y="364" width="174" height="3" rx="1.5" fill="rgba(255,255,255,0.06)"/>
+  <rect x="512" y="364" rx="1.5" height="3" fill="url(#bar2)"><animate attributeName="width" values="0;165" dur="2.2s" fill="freeze"/></rect>
+  <text x="512" y="384" font-family="system-ui,sans-serif" font-size="10" fill="rgba(255,255,255,0.35)">Skills linked</text>
+  <text x="686" y="384" font-family="system-ui,sans-serif" font-size="16" font-weight="900" fill="#34d399" text-anchor="end">4</text>
+  <rect x="512" y="388" width="174" height="3" rx="1.5" fill="rgba(255,255,255,0.06)"/>
+  <rect x="512" y="388" rx="1.5" height="3" fill="url(#bar3)"><animate attributeName="width" values="0;104" dur="2.4s" fill="freeze"/></rect>
+  <text x="496" y="458" font-family="system-ui,sans-serif" font-size="9" fill="rgba(255,255,255,0.18)" letter-spacing="1">MOTION &amp; ENTRANCE</text>
+
+  <!-- COL 4 TYPOGRAPHY MOTION -->
+  <text x="734" y="34" font-family="system-ui,sans-serif" font-size="9" font-weight="700" fill="rgba(255,255,255,0.25)" letter-spacing="2.5">TYPOGRAPHY MOTION</text>
+  <rect x="734" y="44" width="206" height="118" rx="12" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="750" y="68" font-family="system-ui,sans-serif" font-size="9" font-weight="700" fill="rgba(255,255,255,0.25)" letter-spacing="2">SPLIT TEXT</text>
+  <g transform="translate(750,108)">
+    <text class="c1" x="0"  font-family="system-ui,sans-serif" font-size="30" font-weight="900" fill="#fff">M</text>
+    <text class="c2" x="23" font-family="system-ui,sans-serif" font-size="30" font-weight="900" fill="#fff">O</text>
+    <text class="c3" x="46" font-family="system-ui,sans-serif" font-size="30" font-weight="900" fill="#fff">T</text>
+    <text class="c4" x="66" font-family="system-ui,sans-serif" font-size="30" font-weight="900" fill="url(#heroGrad)">I</text>
+    <text class="c5" x="80" font-family="system-ui,sans-serif" font-size="30" font-weight="900" fill="url(#heroGrad)">O</text>
+    <text class="c6" x="103" font-family="system-ui,sans-serif" font-size="30" font-weight="900" fill="url(#heroGrad)">N</text>
+  </g>
+  <rect x="734" y="176" width="206" height="100" rx="12" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="750" y="200" font-family="system-ui,sans-serif" font-size="9" font-weight="700" fill="rgba(255,255,255,0.25)" letter-spacing="2">ROTATING TEXT</text>
+  <text x="750" y="240" font-family="system-ui,sans-serif" font-size="14" fill="rgba(255,255,255,0.45)">Build</text>
+  <svg x="786" y="218" width="80" height="24" overflow="hidden">
+    <g class="rot-words">
+      <text y="18" font-family="system-ui,sans-serif" font-size="14" font-weight="700" fill="#c084fc">premium</text>
+      <text y="42" font-family="system-ui,sans-serif" font-size="14" font-weight="700" fill="#c084fc">bold</text>
+      <text y="66" font-family="system-ui,sans-serif" font-size="14" font-weight="700" fill="#c084fc">minimal</text>
+    </g>
+  </svg>
+  <text x="876" y="240" font-family="system-ui,sans-serif" font-size="14" fill="rgba(255,255,255,0.45)">UIs</text>
+  <rect x="734" y="290" width="206" height="130" rx="12" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="750" y="314" font-family="system-ui,sans-serif" font-size="9" font-weight="700" fill="rgba(255,255,255,0.25)" letter-spacing="2">GLITCH TEXT</text>
+  <g class="glitch-main">
+    <text x="750" y="360" font-family="monospace,sans-serif" font-size="22" font-weight="700" fill="#ffffff">ERROR_404</text>
+  </g>
+  <g class="glitch-r">
+    <text x="753" y="360" font-family="monospace,sans-serif" font-size="22" font-weight="700" fill="#ff4d6d">ERROR_404</text>
+  </g>
+  <g class="glitch-b">
+    <text x="747" y="360" font-family="monospace,sans-serif" font-size="22" font-weight="700" fill="#38bdf8">ERROR_404</text>
+  </g>
+  <text x="734" y="458" font-family="system-ui,sans-serif" font-size="9" fill="rgba(255,255,255,0.18)" letter-spacing="1">KINETIC TYPOGRAPHY</text>
+
+  <!-- COL 5 LOADING STATES -->
+  <text x="972" y="34" font-family="system-ui,sans-serif" font-size="9" font-weight="700" fill="rgba(255,255,255,0.25)" letter-spacing="2.5">LOADING STATES</text>
+  <rect x="972" y="44" width="210" height="118" rx="12" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="988" y="68" font-family="system-ui,sans-serif" font-size="9" font-weight="700" fill="rgba(255,255,255,0.25)" letter-spacing="2">SKELETON LOADER</text>
+  <rect x="988" y="80" width="170" height="9" rx="4" fill="rgba(255,255,255,0.07)"/>
+  <rect y="80" height="9" rx="4" fill="url(#skelGrad)" clip-path="url(#skelClip1)"><animate attributeName="x" values="956;1180" dur="1.6s" repeatCount="indefinite"/><animate attributeName="width" values="120;120" dur="1.6s" repeatCount="indefinite"/></rect>
+  <rect x="988" y="95" width="130" height="9" rx="4" fill="rgba(255,255,255,0.07)"/>
+  <rect y="95" height="9" rx="4" fill="url(#skelGrad)" clip-path="url(#skelClip2)"><animate attributeName="x" values="956;1160" dur="1.6s" begin="0.2s" repeatCount="indefinite"/><animate attributeName="width" values="120;120" dur="1.6s" repeatCount="indefinite"/></rect>
+  <rect x="988" y="110" width="150" height="9" rx="4" fill="rgba(255,255,255,0.07)"/>
+  <rect y="110" height="9" rx="4" fill="url(#skelGrad)" clip-path="url(#skelClip3)"><animate attributeName="x" values="956;1170" dur="1.6s" begin="0.4s" repeatCount="indefinite"/><animate attributeName="width" values="120;120" dur="1.6s" repeatCount="indefinite"/></rect>
+  <rect x="972" y="176" width="210" height="100" rx="12" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="988" y="200" font-family="system-ui,sans-serif" font-size="9" font-weight="700" fill="rgba(255,255,255,0.25)" letter-spacing="2">SHIMMER</text>
+  <rect x="988" y="212" width="178" height="40" rx="8" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <text x="1077" y="237" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="rgba(255,255,255,0.2)" text-anchor="middle">Loading...</text>
+  <rect y="212" width="80" height="40" rx="8" fill="url(#shimmerGrad)" opacity="0.7"><animate attributeName="x" values="988;1182" dur="1.8s" repeatCount="indefinite"/></rect>
+  <rect x="972" y="290" width="210" height="130" rx="12" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="988" y="314" font-family="system-ui,sans-serif" font-size="9" font-weight="700" fill="rgba(255,255,255,0.25)" letter-spacing="2">SPRING MOTION</text>
+  <circle r="16" fill="#6c7aff" opacity="0.9">
+    <animate attributeName="cx" values="1010;1160;1010" dur="2.4s" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1" repeatCount="indefinite"/>
+    <animate attributeName="cy" values="370;348;370" dur="2.4s" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1" repeatCount="indefinite"/>
+    <animate attributeName="fill" values="#6c7aff;#c084fc;#6c7aff" dur="2.4s" repeatCount="indefinite"/>
+  </circle>
+  <text x="988" y="400" font-family="system-ui,sans-serif" font-size="10" fill="rgba(255,255,255,0.3)">Eased spring curve</text>
+  <text x="972" y="458" font-family="system-ui,sans-serif" font-size="9" fill="rgba(255,255,255,0.18)" letter-spacing="1">POLISH &amp; STATES</text>
+
+</svg>

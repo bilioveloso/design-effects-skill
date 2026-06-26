@@ -1,6 +1,6 @@
 # design-effects-skill
 
-![design-effects-skill banner](assets/banner.png)
+![design-effects-skill banner](assets/banner.svg)
 
 An agent-ready skill for design effects, animations, and visual FX.
 
