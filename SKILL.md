@@ -11,6 +11,7 @@ description: >-
   "glassmorphism", "neumorphism", "claymorphism", "brutalism", "bento grid",
   "shader", "3D hero", "micro-interaction", "hover effect", "loading state",
   "gradient border", "lottie", "custom cursor", "image reveal", "scroll timeline",
+  "page recipe", "saas landing", "portfolio", "gaming page", "wellness app",
   "/design-effects-skill".
 trigger_keywords:
   - animation
@@ -41,9 +42,18 @@ trigger_keywords:
   - dark mode motion
   - tooltip animation
   - drawer animation
+  - page recipe
+  - saas landing page
+  - gaming landing page
+  - wellness app
+  - developer tool
+  - creative portfolio
+  - consumer app
+  - dark editorial
+  - enterprise dashboard
   - /design-effects-skill
 author: bilioveloso
-version: "3.0"
+version: "3.1"
 ---
 
 # Design Effects Skill
@@ -52,11 +62,12 @@ version: "3.0"
 This skill teaches an agent to make strong, deliberate design-effect decisions — from choosing a morphism style to selecting the right animation primitive to knowing when restraint is the better design move. For any visual output requiring motion, depth, texture, or atmosphere, the agent should:
 
 1. Identify the context, brand tier, and performance budget.
-2. Use the Decision Guide to match to an effect category.
-3. Pick the lightest effect that achieves the visual goal.
-4. Apply the minimal code snippet as a starting point.
-5. Cross-reference color-combo-skill for palette pairing.
-6. Check accessibility, dark mode, and reduced-motion behavior before shipping.
+2. Check the Page-Type Recipes section first — if the project matches a known archetype, use that stack directly.
+3. Use the Decision Guide to fill in any gaps or custom needs.
+4. Pick the lightest effect that achieves the visual goal.
+5. Apply the minimal code snippet as a starting point.
+6. Cross-reference color-combo-skill for palette pairing.
+7. Check accessibility, dark mode, and reduced-motion behavior before shipping.
 
 ## Core Rules
 - **Never add effects for the sake of effects.** Every animation or visual style must serve atmosphere, feedback, hierarchy, or focus.
@@ -67,6 +78,198 @@ This skill teaches an agent to make strong, deliberate design-effect decisions �
 - **Neumorphism and accessibility are enemies.** Use only after a deliberate contrast audit, and usually only for decorative surfaces.
 - **Dark mode changes the material system.** Shadows weaken, glows strengthen, borders need lower contrast, and glass opacity must change.
 - **Color bridge.** Always source colors from [color-combo-skill](https://github.com/bilioveloso/color-combo-skill) instead of arbitrary hex choices.
+
+---
+
+## Page-Type Recipes
+
+Each recipe is a complete, opinionated effect stack for a specific project archetype. Use these directly — don't mix stacks between archetypes.
+
+> **Agent rule:** When a project clearly matches one of these archetypes, apply this recipe as the starting point. Only deviate when the brief explicitly calls for it.
+
+---
+
+### Recipe 1 — Premium AI / SaaS Landing Page
+
+**Mood:** Intelligent, aspirational, modern dark premium.
+
+| Layer | Choice | Notes |
+|---|---|---|
+| Hero background | ShaderGradient (`waterPlane`, `animate: on`) | Colors from Otherworldly or Dreamy Periwinkle palette |
+| Hero text | BlurText or SplitText | One animated headline, everything else static |
+| Card surface | Glassmorphism (standard or brand-tinted) | On a dark base — glass only works on rich background |
+| Feature section | Bento Grid (2×2 hero card + smaller supporting) | SpotlightCard for hover interaction on each cell |
+| Scroll reveals | IntersectionObserver + stagger (80ms offset) | Fade + translateY(20px) |
+| Social proof | Infinite scroll marquee (logos) + CountUp (stats) | Marquee pauses on hover |
+| Accent | Gradient border on primary CTA | Pseudo-element technique, animated spin optional |
+| Typography | GradientText on subheadline label | Keep to one element — badge or eyebrow label |
+| Page transition | Framer Motion fade + y:8 | 200ms ease-out |
+| Mobile fallback | Static gradient background | Disable ShaderGradient on `max-width: 768px` |
+
+**Palette:** Otherworldly, Dreamy Periwinkle, or Silver Pulse from color-combo-skill.
+
+**Never use in this archetype:** Claymorphism, Brutalism, Ballpit, Hyperspeed, custom cursor on product pages.
+
+---
+
+### Recipe 2 — Gaming / Esports Launch Page
+
+**Mood:** High-energy, cinematic, aggressive, neon-lit.
+
+| Layer | Choice | Notes |
+|---|---|---|
+| Hero background | Hyperspeed or Particles | Dark base, high contrast |
+| Hero text | GlitchText on title + SplitText on tagline | GlitchText only on brand name, never on body |
+| Card surface | Dark glass + animated neon glow border | `border: 1px solid accent` + glow-pulse keyframe |
+| Feature section | Scroll-snap horizontal gallery | Full-bleed cards, one per feature |
+| Scroll reveals | Stagger entrance (60ms, faster than SaaS) | Faster tempo matches brand energy |
+| CTA button | Spinning gradient border + colored shadow | Accent: Midnight Frag cyan or Neon Abyss green |
+| Accent typography | Outlined stroke text as section background texture | Low opacity, oversized, pointer-events none |
+| Loader | Custom animated SVG progress bar | On-brand color, no default spinner |
+| Motion speed | Sharp easing (100–160ms), high stiffness spring | Snappy not smooth — gaming prefers crisp |
+| Mobile fallback | Particles → static dark gradient with grain | Disable Hyperspeed on mobile unconditionally |
+
+**Palette:** Gaming / Esports (Midnight Frag, Neon Abyss) or Acid Contemporary from color-combo-skill.
+
+**Never use in this archetype:** Neumorphism, Claymorphism, soft Aurora, wellness colors, serif fonts.
+
+---
+
+### Recipe 3 — Wellness / Healthcare App
+
+**Mood:** Calm, trustworthy, breathing, organic.
+
+| Layer | Choice | Notes |
+|---|---|---|
+| Hero background | Aurora (slow, low saturation) or Waves | Never Hyperspeed, Particles, or ShaderGradient |
+| Hero text | FadeContent or BlurText (slow, 200ms delay) | Never GlitchText or rapid SplitText |
+| Card surface | Soft glassmorphism on light background | High blur, very low opacity — barely-there glass |
+| Feature section | Stagger reveal grid (gentle, 120ms offset) | No Bento — keep layout calm and predictable |
+| Scroll reveals | FadeContent only — no translate, no scale | Motion must be invisible as a technique |
+| Social proof | Static testimonial cards with mask-reveal on scroll | No marquee — scrolling content feels rushed |
+| CTA button | Full states (hover lift, active press) | No glow, no spinning border — clean and trusted |
+| Empty states | Lottie illustration (calm loop) | Never use a spinner alone in an empty state |
+| Icon animation | SVG stroke draw on success confirmations | Checkmark draw, circle draw — reassuring feedback |
+| Motion timing | Ease-out, 250–400ms, never under 180ms | Slow timing = calm = trusted |
+
+**Palette:** Nature / Organic (Eucalyptus Glow), Healthcare (Clinical Clarity, Vital Green), or Soft Gradients from color-combo-skill.
+
+**Never use in this archetype:** GlitchText, Hyperspeed, Ballpit, Brutalism, Neumorphism, neon borders.
+
+---
+
+### Recipe 4 — Developer Tool / Open Source
+
+**Mood:** Precise, no-nonsense, functional with personality.
+
+| Layer | Choice | Notes |
+|---|---|---|
+| Hero background | DotGrid (animated, subtle) or ShaderGradient (monochrome) | Low energy background — the code content is the hero |
+| Hero text | SplitText or plain — never over-animated | Developers respect restraint; distrust heavy effects |
+| Card surface | Brutalism accents OR flat dark surface with gradient border | Not both — pick one material language |
+| Feature section | Bento Grid or plain responsive grid | SpotlightCard acceptable on dark UI feature cells |
+| Scroll reveals | IntersectionObserver, translateY only, 0.3s | Fast and clean — not dramatic |
+| Code blocks | Syntax-highlighted, ShinyText for copy-to-clipboard badge | No animation on the code itself |
+| CTA button | Brutalist offset shadow OR subtle glow — not both | Match the card language chosen above |
+| Terminal/CLI moment | Animated SVG stroke for typing cursor effect | Draws developer attention immediately |
+| Social proof | CountUp for GitHub stars, npm downloads, users | Hard numbers land better than testimonials |
+| Motion timing | Sharp easing (120–200ms) | Tool-like tempo |
+
+**Palette:** Acid Contemporary, Minimalist (Bone & Carbon), or Corporate (Steel Authority) from color-combo-skill.
+
+**Never use in this archetype:** Ballpit, Hyperspeed, Claymorphism, heavy 3D, Aurora, Waves.
+
+---
+
+### Recipe 5 — Creative Portfolio / Agency
+
+**Mood:** High-personality, experimental, one-of-a-kind.
+
+| Layer | Choice | Notes |
+|---|---|---|
+| Hero background | ShaderGradient or full-bleed editorial photography | If photography: grain overlay + blend mode for texture |
+| Cursor | Custom cursor dot with `mix-blend-mode: difference` | Only on desktop — hide on touch devices |
+| Hero text | Variable font weight animation on hover OR SplitText | One technique only — not both |
+| Card surface | Image zoom + overlay — no morphism | Let the work speak; morphism competes with the content |
+| Project grid | Masonry or asymmetric CSS grid | CircularGallery or Scroll-snap horizontal gallery |
+| Scroll reveals | Mask reveal (clip-path wipe) on each project image | Left-to-right or bottom-to-top wipe |
+| Page transitions | Framer Motion — full cover wipe or opacity crossfade | Adds brand identity at the route level |
+| Typography | Outlined stroke text as section label or background texture | One instance — not every section |
+| Accent | liquid-logo on logo reveal OR gradient border on CTA | One statement liquid/glass moment total |
+| Motion timing | Premium ease cubic-bezier(0.22, 1, 0.36, 1), 400–600ms | Slower and more deliberate = premium craft |
+
+**Palette:** Any — but pick one and commit. Luxury, Gothic / Dark Romance, and Acid Contemporary all work at this tier.
+
+**Never use in this archetype:** Skeleton loaders, enterprise grids, standard button libraries, default browser cursors on desktop.
+
+---
+
+### Recipe 6 — Consumer Lifestyle App
+
+**Mood:** Warm, energetic, tactile, approachable.
+
+| Layer | Choice | Notes |
+|---|---|---|
+| Hero background | Aurora (warm tones) or static gradient with grain | Ballpit acceptable for playful onboarding moment only |
+| Hero text | BlurText or RotatingText (max 4 words) | Friendly and readable, not aggressive |
+| Card surface | Claymorphism (light background only) | Inflated, colorful, tactile — matches lifestyle brand |
+| Feature section | Stagger grid with clay cards | 100ms offset, translateY(12px) |
+| Scroll reveals | FadeContent or ScrollReveal | Gentle, not dramatic |
+| Social proof | CountUp + Marquee testimonials | Warm social proof — reviews, not metrics |
+| CTA button | Clay button style with press state | Inner highlight + offset shadow for clay feel |
+| Onboarding | Lottie illustrations for each step | Playful, branded, non-generic |
+| Icon animation | Bouncy SVG icons (spring physics, scale 0.9→1.1→1) | Matches the playful material language |
+| Motion timing | Spring (medium stiffness, medium damping) + ease-out | Approachable and bouncy, not corporate |
+
+**Palette:** Warm Tropical / Resort, Soft Gradients (Peach Champagne, Dreamy Periwinkle), or Luxury Facade from color-combo-skill.
+
+**Never use in this archetype:** Brutalism, heavy 3D, GlitchText, dark glass, enterprise grids.
+
+---
+
+### Recipe 7 — Dark Editorial / Magazine
+
+**Mood:** Cinematic, high contrast, still, atmospheric.
+
+| Layer | Choice | Notes |
+|---|---|---|
+| Hero background | Full-bleed photography + grain overlay + dark scrim | No animated background — image IS the hero |
+| Grain | Grain overlay at 6–10% opacity, `mix-blend-mode: overlay` | Applied to every section, not just hero |
+| Hero text | Oversized display type — possibly outlined/stroke | Static or slow fade-in — never spring or glitch |
+| Card surface | Glassmorphism (dark tinted) on editorial image cards | Image zoom on hover underneath glass |
+| Section dividers | Mask-reveal wipe as content transitions in | Horizontal wipe, 0.8s ease-out |
+| Typography detail | Variable font hover on article titles | Subtle weight shift on hover — 300 → 700 |
+| Accent | Gradient border (muted, low saturation) on featured item | One per page |
+| Body motion | FadeContent only | Never animate body copy |
+| Social / sharing | ShinyText on "New" or "Featured" badge | Minimal — one accent per page |
+| Motion timing | Premium ease, 400–700ms, always ease-out | Long, deliberate, cinematic |
+
+**Palette:** Gothic / Dark Romance (Velvet Crypt, Blood Amber), Luxury, or Minimalist (Bone & Carbon) from color-combo-skill.
+
+**Never use in this archetype:** Claymorphism, Ballpit, Particles, CountUp, Hyperspeed, Marquee.
+
+---
+
+### Recipe 8 — Enterprise Dashboard / B2B SaaS
+
+**Mood:** Trusted, efficient, precise, data-forward.
+
+| Layer | Choice | Notes |
+|---|---|---|
+| Background | Flat dark or flat light — no animated background in app shell | DotGrid acceptable on marketing/login page only |
+| Hero / onboarding | FadeContent or ScrollReveal on first login | Welcome state only — never in everyday dashboard |
+| Card surface | Flat with elevation shadow system (Level 1–2 only) | No morphism in data-heavy contexts |
+| Data visualization | Stagger entrance on charts (bars animate in sequentially) | CountUp on KPI metrics |
+| Loading states | Shimmer skeleton (matches card layout exactly) | Never use a full-page spinner in a dashboard |
+| Interactions | Full button states — hover, active, focus-visible, disabled | Non-negotiable; must pass WCAG |
+| Modals / drawers | Drawer slide-in (translateX), modal fade+scale(0.98→1) | 220–280ms, ease-out |
+| Notification feed | AnimatedList (spring stagger) | Makes real-time updates feel live without noise |
+| Tooltips | Fade + translateY(4px), 160ms | Fast — never block workflow |
+| Motion timing | Soft ease-out (200–280ms) — purposeful but invisible | Motion should never be the thing users notice |
+
+**Palette:** Corporate / Enterprise (Steel Authority, Slate Command), Minimalist, or Soft Gradients (light mode) from color-combo-skill.
+
+**Never use in this archetype:** ShaderGradient in UI shell, Hyperspeed, Ballpit, Claymorphism, custom cursors, Brutalism, heavy text animations.
 
 ---
 
@@ -332,8 +535,6 @@ Animated icons are one of the most common product-level motion needs. They are s
 > **Agent rule:** Use icon animation for state change and delight, not constant decoration. Repeating icon loops become visual noise fast.
 
 ### SVG Stroke Drawing
-Use for line illustrations, logo reveals, signatures, or checkmarks.
-
 ```css
 .path-draw {
   stroke-dasharray: 400;
@@ -346,18 +547,10 @@ Use for line illustrations, logo reveals, signatures, or checkmarks.
 }
 ```
 
-### Animated Checkmark
-```svg
-<svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-  <circle cx="32" cy="32" r="30" stroke="#1A8A40" stroke-width="4" class="path-draw" />
-  <path d="M18 33L28 43L46 23" stroke="#1A8A40" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="path-draw" />
-</svg>
-```
-
 ### Lottie
-- **What it is:** JSON-based vector animation format exported from After Effects, rendered with a lightweight player.
-- **Best for:** Product onboarding, illustration loops, empty states, success states, branded explainer moments.
-- **Avoid when:** A simple SVG or CSS animation would do — Lottie is for richer illustration motion, not basic hover states.
+- **What it is:** JSON-based vector animation exported from After Effects, rendered with a lightweight player.
+- **Best for:** Product onboarding, empty states, success states, branded explainer moments.
+- **Avoid when:** A simple SVG or CSS animation would do.
 
 ```tsx
 import Lottie from 'lottie-react'
@@ -370,7 +563,7 @@ import successAnimation from './success.json'
 
 ## Cursor Effects
 
-Cursor design is a high-personality layer. It is powerful in portfolios and brand experiences, but often wrong for product UI.
+Cursor design is a high-personality layer — powerful in portfolios and brand experiences, usually wrong for product UI.
 
 > **Agent rule:** Cursor effects are desktop-only enhancements. Never rely on them for meaning, affordance, or navigation.
 
@@ -402,19 +595,11 @@ useEffect(() => {
 }, [])
 ```
 
-### Crosshair / Precision Cursor
-- **Best for:** Portfolios, photography sites, creative tools, premium product showcases.
-- **Avoid when:** The UI is task-heavy or cursor replacement would hurt familiarity.
-
 ---
 
 ## Image & Media Effects
 
-Images often need motion more than text does. Image treatment defines brand polish quickly.
-
 ### Mask Reveal on Scroll
-Use clip-path or transform-based reveals to make media enter elegantly.
-
 ```css
 .image-reveal {
   clip-path: inset(0 100% 0 0);
@@ -428,13 +613,8 @@ Use clip-path or transform-based reveals to make media enter elegantly.
 
 ### Image Zoom + Overlay
 ```css
-.media-card {
-  position: relative;
-  overflow: hidden;
-}
-.media-card img {
-  transition: transform 0.5s ease;
-}
+.media-card { position: relative; overflow: hidden; }
+.media-card img { transition: transform 0.5s ease; }
 .media-card::after {
   content: '';
   position: absolute;
@@ -448,8 +628,6 @@ Use clip-path or transform-based reveals to make media enter elegantly.
 ```
 
 ### Grain / Noise Texture
-Grain adds tactility to flat backgrounds, gradients, glass, and editorial layouts.
-
 ```css
 .grain-overlay::before {
   content: '';
@@ -465,53 +643,29 @@ Grain adds tactility to flat backgrounds, gradients, glass, and editorial layout
 }
 ```
 
-### Blend Mode Layer
-```css
-.blend-accent {
-  mix-blend-mode: screen;
-  opacity: 0.7;
-}
-```
-
 ---
 
 ## Easing & Spring Reference
 
-Motion feel matters as much as motion type. Picking the wrong easing curve can make premium UI feel cheap.
-
 | Feel | Use | Timing |
 |---|---|---|
 | **Ease-out** | Most UI entrances, hover lifts, content reveal | 180–300ms |
-| **Ease-in-out** | Balanced loop, subtle transitions, panels | 250–400ms |
-| **Linear** | Marquee, progress bars, background loops | continuous |
-| **Spring** | Physical cards, toggles, playful elements | tuned by stiffness/damping |
-| **Sharp / snap** | Brutalist interactions, crisp tool UIs | 100–180ms |
+| **Ease-in-out** | Balanced loops, panels | 250–400ms |
+| **Linear** | Marquee, progress bars, loops | continuous |
+| **Spring** | Cards, toggles, playful elements | tuned by stiffness/damping |
+| **Sharp / snap** | Brutalist interactions, tool UIs | 100–180ms |
 
-### Recommended cubic-bezier curves
 ```css
-/* Premium smooth */
 --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
-
-/* Soft standard UI */
---ease-soft: cubic-bezier(0.25, 0.1, 0.25, 1);
-
-/* Snappy brutal / tool UI */
---ease-snap: cubic-bezier(0.2, 0.8, 0.2, 1);
+--ease-soft:    cubic-bezier(0.25, 0.1, 0.25, 1);
+--ease-snap:    cubic-bezier(0.2, 0.8, 0.2, 1);
 ```
-
-### Spring guidance
-- Use springs for drag, toggles, cards, cursors, and playful UI.
-- Avoid springs for text readability reveals and dense dashboard transitions.
-- High stiffness + low damping = energetic / playful.
-- Medium stiffness + medium damping = premium / calm.
 
 ---
 
 ## Motion & Scroll
 
-### ScrollReveal
-- Use IntersectionObserver for performant viewport-driven reveals when libraries are unnecessary.
-
+### IntersectionObserver Reveal
 ```tsx
 useEffect(() => {
   const observer = new IntersectionObserver((entries) => {
@@ -531,15 +685,10 @@ useEffect(() => {
   transform: translateY(20px);
   transition: opacity 0.5s var(--ease-premium), transform 0.5s var(--ease-premium);
 }
-.reveal.in-view {
-  opacity: 1;
-  transform: translateY(0);
-}
+.reveal.in-view { opacity: 1; transform: translateY(0); }
 ```
 
 ### CSS Scroll-Driven Animations
-Use the native scroll timeline API when supported.
-
 ```css
 @supports (animation-timeline: scroll()) {
   .scroll-progress {
@@ -548,20 +697,10 @@ Use the native scroll timeline API when supported.
     animation-range: 0% 100%;
     transform-origin: left center;
   }
-
   @keyframes grow {
     from { transform: scaleX(0); }
     to { transform: scaleX(1); }
   }
-}
-```
-
-### Parallax
-```css
-.parallax-section {
-  background-attachment: fixed;
-  background-position: center;
-  background-size: cover;
 }
 ```
 
@@ -623,8 +762,6 @@ export function HeroBackground() {
 
 ## UI Motion Patterns
 
-These are the bread-and-butter patterns of modern UI transitions.
-
 ### Tooltip Entrance
 ```css
 .tooltip {
@@ -680,8 +817,6 @@ These are the bread-and-butter patterns of modern UI transitions.
 ```
 
 ### Scroll Snap Gallery
-Use for full-screen stories, product showcases, and horizontal feature tours.
-
 ```css
 .snap-x {
   display: flex;
@@ -693,13 +828,6 @@ Use for full-screen stories, product showcases, and horizontal feature tours.
   scroll-snap-align: start;
 }
 ```
-
-### Sticky Hero Anatomy
-A premium landing page often uses:
-- Sticky hero copy
-- Scrolling visual panel
-- Parallax or reveal behind it
-- Single primary CTA and one secondary CTA
 
 ### Infinite Scroll / Marquee
 ```css
@@ -718,20 +846,17 @@ A premium landing page often uses:
 
 ## Dark Mode Adaptations
 
-Effects need different tuning in dark UI.
-
-- Shadows should be weaker; use glow or border contrast instead.
-- Glass opacity should increase slightly in dark mode for readability.
-- Gradient borders need less saturation and lower luminance contrast.
-- Grain works better at lower opacity in dark mode.
-- White text on animated backgrounds needs a dark overlay or scrim.
+- Shadows weaken in dark mode; use glow or subtle borders instead.
+- Glass opacity should increase slightly for readability.
+- Gradient borders need lower saturation in dark contexts.
+- Grain texture works at lower opacity in dark mode.
+- Always add a dark scrim on text over animated backgrounds.
 
 ```css
 .dark .glass-card {
   background: rgba(10, 12, 16, 0.45);
   border-color: rgba(255, 255, 255, 0.08);
 }
-
 .dark .card-shadow {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
 }
@@ -795,10 +920,11 @@ Use [color-combo-skill](https://github.com/bilioveloso/color-combo-skill) for al
 
 | Context | Recommended palette |
 |---|---|
-| Premium glass hero | Luxury or Soft Gradients |
-| Brutalist developer tool | Acid Contemporary |
-| Claymorphic consumer app | Warm Tropical / Resort or Soft Gradients |
-| Gaming glow borders | Gaming / Esports or Otherworldly |
+| Premium AI SaaS hero | Otherworldly or Dreamy Periwinkle |
+| Gaming glow borders | Gaming / Esports (Midnight Frag, Neon Abyss) |
 | Wellness aurora layout | Nature / Organic or Healthcare |
 | Dark editorial grain and glass | Gothic / Dark Romance |
 | Corporate motion dashboard | Corporate / Enterprise |
+| Brutalist developer tool | Acid Contemporary |
+| Consumer lifestyle app | Warm Tropical / Resort or Soft Gradients |
+| Creative portfolio | Any — one palette, committed |
