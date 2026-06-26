@@ -960,3 +960,232 @@ Use [color-combo-skill](https://github.com/bilioveloso/color-combo-skill) for al
 | Brutalist developer tool | Acid Contemporary |
 | Consumer lifestyle app | Warm Tropical / Resort or Soft Gradients |
 | Creative portfolio | Any — one palette, committed |
+
+---
+
+## CSS Quick Start
+
+Copy-paste CSS custom properties and implementation checklists for each major effect style. Use these as the starting point — tweak values to match your palette.
+
+### Glassmorphism
+
+```css
+/* Required: place over a vivid blurred background (blobs, gradients) */
+--blur-amount: 15px;
+--glass-opacity: 0.15;
+--border-color: rgba(255, 255, 255, 0.2);
+
+.glass-card {
+  backdrop-filter: blur(var(--blur-amount)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--blur-amount)) saturate(180%);
+  background: rgba(255, 255, 255, var(--glass-opacity));
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+              inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+```
+
+**Checklist:** ☐ backdrop-filter blur 10–20px · ☐ Translucent bg 10–25% opacity · ☐ 1px light border · ☐ Vivid background behind card · ☐ Text contrast 4.5:1 verified · ☐ `-webkit-` prefix present · ☐ prefers-reduced-motion fallback
+
+---
+
+### Neumorphism
+
+```css
+--border-radius: 14px;
+--shadow-light: -5px -5px 15px rgba(255, 255, 255, 0.8);
+--shadow-dark:   5px  5px 15px rgba(0, 0, 0, 0.1);
+--color-surface: #E0E5EC;
+
+.neuo-card {
+  background: var(--color-surface);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-light), var(--shadow-dark);
+}
+.neuo-card:active {
+  box-shadow: inset var(--shadow-light), inset var(--shadow-dark);
+  transition: box-shadow 150ms ease;
+}
+```
+
+**Checklist:** ☐ Rounded corners 12–16px · ☐ Dual shadow layers (light + dark) · ☐ Monochromatic pastel palette · ☐ Press animation 150ms · ☐ Contrast audit (neuo fails easily — test every text/background pair)
+
+---
+
+### Claymorphism
+
+```css
+--border-radius: 20px;
+--border-width: 3px;
+--shadow-inner: inset -2px -2px 8px rgba(255, 255, 255, 0.6);
+--shadow-outer:       4px  4px 8px rgba(0, 0, 0, 0.15);
+--color-clay: #FFB3C1; /* replace with your pastel */
+
+.clay-card {
+  background: var(--color-clay);
+  border-radius: var(--border-radius);
+  border: var(--border-width) solid rgba(255, 255, 255, 0.5);
+  box-shadow: var(--shadow-inner), var(--shadow-outer);
+}
+/* Bounce animation */
+@keyframes clay-bounce {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.04); }
+}
+```
+
+**Checklist:** ☐ Border-radius 16–24px · ☐ Thick border 3–4px · ☐ Double shadows (inner + outer) · ☐ Pastel palette · ☐ Bounce animations cubic-bezier(0.34, 1.56, 0.64, 1) · ☐ Playful micro-interactions
+
+---
+
+### Brutalism
+
+```css
+--border-radius: 0px;
+--border: 3px solid #000;
+--font-weight: 800;
+--transition: none;
+
+.brutal-card {
+  border-radius: var(--border-radius);
+  border: var(--border);
+  font-weight: var(--font-weight);
+  box-shadow: 4px 4px 0 #000; /* offset shadow, no blur */
+  transition: var(--transition);
+}
+.brutal-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 #000;
+}
+```
+
+**Checklist:** ☐ border-radius: 0 · ☐ Visible borders 2–4px · ☐ Bold/black typography 700+ · ☐ Pure primary colors (#FF0000 #0000FF #FFFF00) · ☐ No transitions or instant (0ms) · ☐ Asymmetric layout intentional
+
+---
+
+### Minimalism / Flat
+
+```css
+--spacing: 2rem;
+--border-radius: 4px;
+--shadow: none;
+--accent: #0066CC; /* single accent only */
+
+.flat-card {
+  background: #fff;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  padding: var(--spacing);
+  border: 1px solid #E5E7EB;
+}
+/* Hover: subtle background only, no lift */
+.flat-card:hover { background: #F9FAFB; }
+```
+
+**Checklist:** ☐ No box-shadow or extremely subtle · ☐ 4–6 solid colors max · ☐ No gradients · ☐ Single accent color · ☐ Grid-based layout · ☐ Hover: background shift only (no translate)
+
+---
+
+### Dark OLED
+
+```css
+--bg-black: #000000;
+--bg-surface: #0D0D0D;
+--text-primary: #FFFFFF;
+--text-secondary: #A0A0A0;
+--accent-neon: #00F5FF; /* swap for your neon */
+--glow: 0 0 12px rgba(0, 245, 255, 0.4);
+
+body { background: var(--bg-black); color-scheme: dark; }
+.oled-card {
+  background: var(--bg-surface);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: var(--text-primary);
+}
+.neon-accent { color: var(--accent-neon); text-shadow: var(--glow); }
+```
+
+**Checklist:** ☐ True black #000000 (OLED power save) · ☐ Text contrast 7:1+ · ☐ Neon accent used sparingly · ☐ No pure white backgrounds · ☐ color-scheme: dark declared · ☐ Glow effects minimal
+
+---
+
+### Aurora / Mesh Gradient
+
+```css
+@keyframes aurora {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+
+.aurora-bg {
+  background: linear-gradient(135deg, #667eea, #764ba2, #f64f59, #c471ed);
+  background-size: 300% 300%;
+  animation: aurora 10s ease infinite;
+  filter: saturate(1.2);
+}
+/* Text overlay needs dark scrim */
+.aurora-text-overlay {
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(2px);
+}
+```
+
+**Checklist:** ☐ Complementary color pairs · ☐ 8–12s animation loop · ☐ background-size 200–300% · ☐ Text always on scrim/overlay · ☐ prefers-reduced-motion: pause animation · ☐ Smooth color transitions
+
+---
+
+### Liquid Glass
+
+```css
+--morph-duration: 500ms;
+--blur: 18px;
+
+.liquid-glass {
+  backdrop-filter: blur(var(--blur)) saturate(200%) brightness(1.1);
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  /* Chromatic aberration via text-shadow on headings */
+}
+h2.chromatic {
+  text-shadow: -1px 0 rgba(255, 0, 100, 0.5), 1px 0 rgba(0, 200, 255, 0.5);
+}
+@keyframes morph {
+  0%, 100% { border-radius: 24px 16px 24px 16px; }
+  50%       { border-radius: 16px 24px 16px 24px; }
+}
+```
+
+**Checklist:** ☐ Morphing animations 400–600ms · ☐ Chromatic aberration on headings · ☐ Dynamic blur + saturate · ☐ Iridescent gradient background · ☐ One hero element only — not repeated across page · ☐ Mobile fallback (static blur)
+
+---
+
+### Motion-Driven / Scroll Reveal
+
+```css
+/* Use Intersection Observer — not CSS alone */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 350ms ease, transform 350ms ease;
+  will-change: transform;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+```
+
+```js
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+```
+
+**Checklist:** ☐ Intersection Observer API · ☐ will-change: transform (not layout props) · ☐ Stagger children 30–50ms · ☐ prefers-reduced-motion respected · ☐ GPU-accelerated (transform/opacity only) · ☐ Entry animation ease-out, exit ease-in
