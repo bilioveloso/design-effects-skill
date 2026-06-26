@@ -1,5 +1,7 @@
 # design-effects-skill
 
+![design-effects-skill banner](assets/banner.png)
+
 An agent-ready skill for design effects, animations, and visual FX.
 
 ## What this is
@@ -30,6 +32,10 @@ Point your agent at `SKILL.md` as a skill or context file. The agent will:
 2. Pick the named effect that fits the mood and performance budget.
 3. Apply the minimal code snippet as a starting point.
 4. Cross-reference color-combo-skill for palette pairing.
+
+## Live Examples
+
+Open [`examples/banner.html`](examples/banner.html) in any browser to see all effects animated in real time — no build step required.
 
 ## Sources
 
