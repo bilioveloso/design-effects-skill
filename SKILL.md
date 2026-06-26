@@ -1,14 +1,17 @@
 ---
 name: design-effects-skill
 description: >-
-  Visual effects and animation patterns for UI and branding contexts. Use when
-  choosing or implementing animated backgrounds, text effects, morphism styles,
-  micro-interactions, motion patterns, liquid/glass FX, shader gradients, depth
-  systems, border effects, or 3D elements. Activate on: "add animation",
+  Visual effects, animation patterns, morphism systems, interaction states, and
+  layout patterns for UI and branding contexts. Use when choosing or
+  implementing animated backgrounds, text effects, morphism styles,
+  micro-interactions, motion patterns, cursor effects, image/media effects,
+  liquid/glass FX, shader gradients, depth systems, border effects, scroll
+  animations, dark-mode adaptations, or 3D elements. Activate on: "add animation",
   "make it more dynamic", "animated background", "text effect", "visual effect",
   "glassmorphism", "neumorphism", "claymorphism", "brutalism", "bento grid",
   "shader", "3D hero", "micro-interaction", "hover effect", "loading state",
-  "gradient border", "/design-effects-skill".
+  "gradient border", "lottie", "custom cursor", "image reveal", "scroll timeline",
+  "/design-effects-skill".
 trigger_keywords:
   - animation
   - animated background
@@ -31,30 +34,39 @@ trigger_keywords:
   - gradient border
   - glow effect
   - variable font
+  - lottie
+  - custom cursor
+  - image reveal
+  - scroll timeline
+  - dark mode motion
+  - tooltip animation
+  - drawer animation
   - /design-effects-skill
 author: bilioveloso
-version: "2.0"
+version: "3.0"
 ---
 
 # Design Effects Skill
 
 ## Purpose
-This skill teaches an agent to make better visual effect decisions — from choosing a morphism style to picking the right scroll animation to knowing when NOT to add effects at all. For any visual output requiring motion, depth, texture, or atmosphere, the agent should:
+This skill teaches an agent to make strong, deliberate design-effect decisions — from choosing a morphism style to selecting the right animation primitive to knowing when restraint is the better design move. For any visual output requiring motion, depth, texture, or atmosphere, the agent should:
 
 1. Identify the context, brand tier, and performance budget.
 2. Use the Decision Guide to match to an effect category.
-3. Pick the named effect that fits.
+3. Pick the lightest effect that achieves the visual goal.
 4. Apply the minimal code snippet as a starting point.
 5. Cross-reference color-combo-skill for palette pairing.
+6. Check accessibility, dark mode, and reduced-motion behavior before shipping.
 
 ## Core Rules
-- **Never add effects for the sake of effects.** Every animation or visual style must serve a purpose — atmosphere, feedback, or focus.
-- **Performance first.** Heavy effects (3D, shaders, particles) are only justified on hero sections or dedicated visual moments, never on every element.
-- **One hero effect per page.** If a page has a ShaderGradient hero, it doesn't also need particle backgrounds and liquid glass cards.
-- **Mobile check.** Shader and 3D effects can be expensive on mobile. Always provide a static fallback.
-- **Morphism needs a background.** Glass, clay, and neuo effects only work when there is something behind the surface — a flat background kills all of them.
-- **Neumorphism and accessibility are enemies.** The soft shadow technique almost always fails WCAG contrast. Never use neumorphism for text-heavy or interactive UI without a contrast audit.
-- **Color bridge.** When choosing colors for any effect, reference [color-combo-skill](https://github.com/bilioveloso/color-combo-skill) palettes rather than picking arbitrary hex values.
+- **Never add effects for the sake of effects.** Every animation or visual style must serve atmosphere, feedback, hierarchy, or focus.
+- **Performance first.** Heavy effects (3D, shaders, particles, distortion, liquid glass) belong on hero moments, not across the whole interface.
+- **One hero effect per page.** If a page has a ShaderGradient hero, it does not also need Ballpit, neon borders, and liquid glass cards.
+- **Mobile check.** Shader, 3D, and cursor-dependent effects often fail on mobile. Always provide a static or touch-friendly fallback.
+- **Morphism needs a background.** Glass, clay, and neuo effects only work when the background provides contrast and context.
+- **Neumorphism and accessibility are enemies.** Use only after a deliberate contrast audit, and usually only for decorative surfaces.
+- **Dark mode changes the material system.** Shadows weaken, glows strengthen, borders need lower contrast, and glass opacity must change.
+- **Color bridge.** Always source colors from [color-combo-skill](https://github.com/bilioveloso/color-combo-skill) instead of arbitrary hex choices.
 
 ---
 
@@ -64,62 +76,53 @@ This skill teaches an agent to make better visual effect decisions — from choo
 
 | Goal | Effect / Category |
 |---|---|
-| Immersive, breathing hero background | Animated Backgrounds → ShaderGradient or Aurora |
-| Subtle, textured background | Animated Backgrounds → DotGrid, Grid, or Noise |
-| Interactive particle atmosphere | Animated Backgrounds → Particles or Orbs |
-| High-energy cinematic moment | Animated Backgrounds → Hyperspeed |
-| Hero text that demands attention | Text Animations → SplitText or BlurText |
-| Counting numbers / stats | Text Animations → CountUp |
-| Multiple value props in one headline | Text Animations → RotatingText |
-| Text as visual texture or decoration | Typography Effects → Oversized Display or Outlined Text |
-| Scroll-triggered content reveals | Motion & Scroll → ScrollReveal or FadeContent |
-| Staggered list or grid entrance | Motion & Scroll → Stagger |
-| Scroll-linked depth on hero | Motion & Scroll → Parallax |
-| Page-to-page transitions | Motion & Scroll → Page Transitions |
-| Hover micro-interactions on UI | UI Components → Magnet, TiltCard, SpotlightCard |
-| Button feedback / press states | Micro-interactions → Button States |
-| Loading / async content | Micro-interactions → Skeleton or Spinner |
-| Success / error feedback | Micro-interactions → State Animations |
-| Premium frosted overlay or card | Design Morphisms → Glassmorphism |
-| Soft, tactile, extruded UI surface | Design Morphisms → Neumorphism |
-| Inflated, cartoon-soft card | Design Morphisms → Claymorphism |
-| Raw, high-contrast, structural | Design Morphisms → Brutalism |
-| SaaS feature section layout | Layout Patterns → Bento Grid |
-| Scrolling ticker or marquee | Layout Patterns → Infinite Scroll / Marquee |
-| Premium brand logo animation | Liquid & Glass FX → liquid-logo |
-| Apple-style distortion overlay | Liquid & Glass FX → liquid-glass-js |
-| Glowing or gradient border | Border & Glow Effects → Gradient Border or Glow |
-| Animated neon outline | Border & Glow Effects → Animated Glow |
-| 3D product viewer or abstract hero | 3D in UI → react-three-fiber |
+| Immersive hero background | Animated Backgrounds → ShaderGradient or Aurora |
+| Subtle atmospheric texture | Animated Backgrounds → DotGrid, Noise, Grain |
+| High-energy launch moment | Animated Backgrounds → Hyperspeed |
+| Hero text reveal | Text Animations → BlurText or SplitText |
+| Scroll-triggered content entrance | Motion & Scroll → ScrollReveal, Stagger, or Scroll Timeline |
+| Metrics and social proof | Text Animations → CountUp |
+| Strong card hierarchy | Layout Patterns → Bento Grid |
+| Premium frosted surface | Design Morphisms → Glassmorphism |
+| Soft tactile surface | Design Morphisms → Neumorphism |
+| Playful inflated surface | Design Morphisms → Claymorphism |
+| Raw anti-polish aesthetic | Design Morphisms → Brutalism |
+| Product feedback state | Micro-interactions → Success / Error / Loading |
+| Premium image reveal | Image & Media Effects → Mask Reveal or Hover Distortion |
+| Brand logo motion | Icon & SVG Animation → SVG stroke animation or liquid-logo |
+| Portfolio cursor drama | Cursor Effects → Crosshair / Custom Cursor |
+| Navigation or overlay entrance | UI Motion Patterns → Drawer, Tooltip, Dropdown |
+| Horizontal showcase layout | Layout Patterns → Scroll Snap or Horizontal Scroll |
+| 3D product or hero | 3D in UI → react-three-fiber |
 
-### By brand tier
+### By animation primitive
 
-| Brand tier | Appropriate effects | Never use |
-|---|---|---|
-| **Enterprise / B2B** | DotGrid, FadeContent, subtle SpotlightCard, Skeleton loaders | Claymorphism, Brutalism, Hyperspeed, Ballpit |
-| **Premium / Luxury** | ShaderGradient, Glassmorphism, liquid-logo, BlurText, GradientText | Claymorphism, Neumorphism, Pixel effects |
-| **Consumer / Lifestyle** | Aurora, Waves, Claymorphism, TiltCard, Marquee, CountUp | Heavy 3D, Hyperspeed |
-| **Gaming / Esports** | Hyperspeed, Particles, GlitchText, Glow borders, Ballpit | Glassmorphism (unless dark tinted), Neumorphism |
-| **Wellness / Healthcare** | Waves, Aurora, FadeContent, soft Glassmorphism | Glitch, Hyperspeed, Acid effects |
-| **Creative / Portfolio** | Any — but one hero effect only, everything else restrained | Stacking 3+ heavy effects |
-| **Developer Tool / SaaS** | DotGrid, ShaderGradient, ScrollReveal, Skeleton, Brutalism accents | Claymorphism, Liquid effects |
+| Need | Best primitive |
+|---|---|
+| Simple hover state | CSS transition |
+| Repeated decorative loop | CSS keyframes |
+| Scroll-linked entrance | IntersectionObserver + CSS |
+| Scroll position drives progress | CSS `animation-timeline: scroll()` or JS scroll sync |
+| Route/page transitions | Framer Motion |
+| SVG line drawing | `stroke-dasharray` / `stroke-dashoffset` |
+| Complex illustration animation | Lottie |
+| Physically believable UI motion | Spring physics |
+| 3D scene / mesh / shader | react-three-fiber or ShaderGradient |
 
 ---
 
 ## Design Morphisms
 
-Morphism styles define the visual language of surfaces and cards. They are not animations — they are material languages. Choose one per project and apply it consistently.
+Morphism styles define the material language of surfaces and cards. Choose one per project and apply it consistently.
 
-> **Agent rule:** Never mix morphism styles in the same UI. Glassmorphism cards next to neumorphic buttons is a failure state. Pick one material language and commit.
+> **Agent rule:** Never mix morphism styles in the same interface. Glass next to neumorphic controls next to brutalist cards is design indecision, not richness.
 
 ### Glassmorphism
-- **What it is:** Frosted glass effect using `backdrop-filter: blur()`. The element appears to float above the background with a translucent, blurred surface.
-- **Best for:** Overlays on photo/gradient/video backgrounds, premium UI, modals, navigation bars on hero sections, Apple-adjacent products.
-- **Avoid when:** The background is flat or solid — glass with nothing behind it is invisible. Also avoid in dense data UIs where subtle surfaces create noise.
-- **Color pairing:** Works on any rich background — use Luxury, Soft Gradients, or Otherworldly palettes behind the glass.
+- **What it is:** Frosted translucent surface using `backdrop-filter` blur, usually paired with subtle border and soft shadow.
+- **Best for:** Premium overlays, nav bars on hero images, modal shells, dashboard highlights.
+- **Avoid when:** The background is flat, the UI is dense, or readability is more important than atmosphere.
 
 ```css
-/* Standard glass card */
 .glass-card {
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(20px) saturate(180%);
@@ -129,7 +132,6 @@ Morphism styles define the visual language of surfaces and cards. They are not a
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
-/* Dark tinted glass (gaming / gothic) */
 .glass-card--dark {
   background: rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(24px) saturate(160%);
@@ -137,122 +139,52 @@ Morphism styles define the visual language of surfaces and cards. They are not a
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 12px;
 }
-
-/* Colored tinted glass (brand accent) */
-.glass-card--tinted {
-  background: rgba(43, 238, 52, 0.08); /* Silver Pulse accent — Otherworldly */
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(43, 238, 52, 0.18);
-  border-radius: 14px;
-}
-```
-
-**Browser note:** `backdrop-filter` requires `-webkit-` prefix for Safari. It is unsupported in Firefox by default (user must enable `layout.css.backdrop-filter.enabled`). Always test or provide a solid-background fallback.
-
-```css
-/* Fallback for Firefox */
-@supports not (backdrop-filter: blur(1px)) {
-  .glass-card {
-    background: rgba(20, 20, 30, 0.85);
-  }
-}
 ```
 
 ### Neumorphism
-- **What it is:** Soft UI — elements appear extruded from or pressed into the background using dual layered shadows (light from top-left, dark from bottom-right). The element and background share the same color.
-- **Best for:** Premium calm apps (meditation, wellness, audio players), tactile dashboard widgets, decorative UI moments.
-- **Avoid when:** Text contrast is required — neumorphism almost always fails WCAG 4.5:1 on interactive elements. Never use on buttons that need to be clearly clickable, form inputs, or any accessibility-critical context.
-- **Color pairing:** Requires a mid-tone base — works best with Minimalist (Warm Mono, Bone & Carbon) or soft Healthcare palettes. Never on pure black or white.
+- **What it is:** Soft raised or inset surfaces created with paired light and dark shadows on a same-color background.
+- **Best for:** Decorative wellness surfaces, audio players, tactile widgets.
+- **Avoid when:** Controls need strong clarity, contrast, or enterprise credibility.
 
 ```css
-/* Extruded (raised) neumorphic surface */
 .neuo-raised {
-  background: #E8E0D8; /* Warm Mono secondary — Minimalist */
+  background: #E8E0D8;
   border-radius: 16px;
   box-shadow:
     8px 8px 16px rgba(0, 0, 0, 0.15),
     -8px -8px 16px rgba(255, 255, 255, 0.7);
 }
-
-/* Inset (pressed) neumorphic surface */
-.neuo-inset {
-  background: #E8E0D8;
-  border-radius: 16px;
-  box-shadow:
-    inset 6px 6px 12px rgba(0, 0, 0, 0.15),
-    inset -6px -6px 12px rgba(255, 255, 255, 0.7);
-}
 ```
 
-**Accessibility warning:** Always run a contrast check. If the element contains text or is interactive, neumorphism is likely not appropriate without a separate high-contrast text treatment.
-
 ### Claymorphism
-- **What it is:** 3D inflated, rounded, soft surfaces that look like clay or inflatable objects. Achieved with large border-radius, thick colored outer glow, inner highlight, and subtle 3D shadow.
-- **Best for:** Consumer mobile apps, children's products, playful SaaS onboarding, lifestyle brands, Dribbble-adjacent portfolios.
-- **Avoid when:** Enterprise, healthcare (clinical), or any context requiring seriousness and trust. Clay signals playful, not professional.
-- **Color pairing:** Works best with bright, saturated pastels — use Luxury Facade, Warm Tropical/Resort, or custom pastels. Always use a light or white background behind clay elements.
+- **What it is:** Inflated rounded surfaces with chunky shadows, inner highlights, and toy-like tactility.
+- **Best for:** Playful mobile onboarding, consumer apps, lifestyle brands.
+- **Avoid when:** Professional trust is the main goal.
 
 ```css
 .clay-card {
-  background: #FFD3B6; /* Peach Champagne — Soft Gradients */
+  background: #FFD3B6;
   border-radius: 28px;
   box-shadow:
-    0 8px 0px rgba(0, 0, 0, 0.15),          /* ground shadow */
-    0 16px 40px rgba(0, 0, 0, 0.12),         /* depth shadow */
-    inset 0 -4px 8px rgba(0, 0, 0, 0.08),    /* bottom inner shadow */
-    inset 0 4px 8px rgba(255, 255, 255, 0.6); /* top inner highlight */
-  border: 3px solid rgba(255, 255, 255, 0.6);
-}
-
-/* Clay button */
-.clay-button {
-  background: #B8C0FF; /* Dreamy Periwinkle */
-  border-radius: 50px;
-  padding: 14px 32px;
-  box-shadow:
-    0 6px 0px #8890D8,
-    0 10px 24px rgba(0, 0, 0, 0.15),
-    inset 0 3px 6px rgba(255, 255, 255, 0.5);
-  border: 2px solid rgba(255, 255, 255, 0.5);
-  font-weight: 700;
+    0 8px 0px rgba(0, 0, 0, 0.15),
+    0 16px 40px rgba(0, 0, 0, 0.12),
+    inset 0 -4px 8px rgba(0, 0, 0, 0.08),
+    inset 0 4px 8px rgba(255, 255, 255, 0.6);
 }
 ```
 
 ### Brutalism
-- **What it is:** Raw, exposed, anti-polish design. Hard borders, flat colors, visible structure, high contrast, intentional roughness. Rejects decoration in favor of directness.
-- **Best for:** Developer tools, independent SaaS, editorial publications, creative agencies, alt-culture brands, projects where authenticity > refinement.
-- **Avoid when:** The audience is conservative (enterprise, finance, healthcare), or the brand needs to convey safety and trust.
-- **Color pairing:** Acid Contemporary, Refined Defaults (pushed to extremes), or literal black/white. Brutalism earns the right to use #000000.
+- **What it is:** Flat color, hard borders, offset shadows, intentional roughness, no softness.
+- **Best for:** Developer tools, editorial, creative agencies, anti-corporate brands.
+- **Avoid when:** Safety, polish, and reassurance matter more than personality.
 
 ```css
-/* Brutalist card */
 .brutal-card {
-  background: #F5E800; /* Ink Volt secondary — Acid Contemporary */
+  background: #F5E800;
   border: 3px solid #0A0A0A;
   border-radius: 0;
   box-shadow: 6px 6px 0px #0A0A0A;
   padding: 24px;
-}
-
-/* Brutalist button */
-.brutal-button {
-  background: #0A0A0A;
-  color: #F5E800;
-  border: 3px solid #0A0A0A;
-  border-radius: 0;
-  box-shadow: 4px 4px 0px #F5E800;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  padding: 12px 28px;
-  cursor: pointer;
-  transition: box-shadow 0.1s, transform 0.1s;
-}
-
-.brutal-button:hover {
-  box-shadow: 2px 2px 0px #F5E800;
-  transform: translate(2px, 2px);
 }
 ```
 
@@ -260,17 +192,15 @@ Morphism styles define the visual language of surfaces and cards. They are not a
 
 ## Micro-interactions
 
-The smallest unit of design feedback. Micro-interactions make a UI feel alive and responsive. They are not decorative — they communicate state, confirm actions, and reduce uncertainty.
+Micro-interactions communicate response, affordance, and confidence. They are the difference between a UI feeling static versus alive.
 
-> **Agent rule:** Every interactive element needs a hover state, active/press state, and focus state. Missing any of these is an incomplete implementation.
+> **Agent rule:** Every interactive element needs hover, active, focus-visible, and disabled or inactive behavior.
 
 ### Button States
-All buttons need all four states. Missing states make the UI feel broken.
-
 ```css
 .button {
-  background: #2A7AE8; /* Steel Authority accent — Corporate */
-  color: #ffffff;
+  background: #2A7AE8;
+  color: #fff;
   border: none;
   border-radius: 8px;
   padding: 12px 24px;
@@ -278,448 +208,356 @@ All buttons need all four states. Missing states make the UI feel broken.
   cursor: pointer;
   transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
 }
-
-/* Hover — lighten or lift */
 .button:hover {
   background: #4A90F0;
   box-shadow: 0 4px 16px rgba(42, 122, 232, 0.35);
   transform: translateY(-1px);
 }
-
-/* Active / press — push down */
 .button:active {
   background: #1A5AB8;
   transform: translateY(1px);
   box-shadow: none;
 }
-
-/* Focus — keyboard accessibility */
 .button:focus-visible {
   outline: 3px solid #2A7AE8;
   outline-offset: 3px;
 }
-
-/* Disabled */
 .button:disabled {
   background: #A8B8CC;
   cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
 }
 ```
 
-### Loading States — Skeleton vs. Spinner
-Choose based on what you know about the content shape.
-
+### Loading States
 | Use | When |
 |---|---|
-| **Skeleton screen** | You know the layout of the content being loaded (cards, lists, profiles) |
-| **Spinner** | Unknown duration, unknown content shape, or a small inline action |
-| **Progress bar** | File uploads, multi-step processes, known completion percentage |
-| **Shimmer skeleton** | Preferred over static skeleton — communicates active loading |
+| Skeleton | Layout shape is known |
+| Spinner | Short inline action or unknown wait |
+| Progress bar | Completion percentage is known |
+| Shimmer skeleton | Preferred when keeping layout stable |
 
+### Success / Error State Animation
 ```css
-/* Shimmer skeleton */
-.skeleton {
-  background: linear-gradient(
-    90deg,
-    #E8E0D8 25%,
-    #F5F0EB 50%,
-    #E8E0D8 75%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 1.4s infinite;
-  border-radius: 6px;
-}
-
-@keyframes shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
-}
-
-/* Skeleton line examples */
-.skeleton-title { width: 60%; height: 20px; margin-bottom: 12px; }
-.skeleton-body  { width: 100%; height: 14px; margin-bottom: 8px; }
-.skeleton-avatar { width: 48px; height: 48px; border-radius: 50%; }
-```
-
-### Success / Error State Animations
-State changes need motion to be noticed. Static color swaps are often missed.
-
-```css
-/* Success — green pulse */
 @keyframes success-pulse {
-  0%   { box-shadow: 0 0 0 0 rgba(26, 138, 64, 0.4); }
-  70%  { box-shadow: 0 0 0 10px rgba(26, 138, 64, 0); }
+  0% { box-shadow: 0 0 0 0 rgba(26, 138, 64, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(26, 138, 64, 0); }
   100% { box-shadow: 0 0 0 0 rgba(26, 138, 64, 0); }
 }
-.state-success {
-  border-color: #1A8A40; /* Vital Green accent — Healthcare */
-  animation: success-pulse 0.6s ease-out;
-}
+.state-success { animation: success-pulse 0.6s ease-out; }
 
-/* Error — red shake */
 @keyframes error-shake {
-  0%, 100% { transform: translateX(0); }
-  20%      { transform: translateX(-6px); }
-  40%      { transform: translateX(6px); }
-  60%      { transform: translateX(-4px); }
-  80%      { transform: translateX(4px); }
+  0%,100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
 }
-.state-error {
-  border-color: #D7202D;
-  animation: error-shake 0.4s ease-out;
-}
+.state-error { animation: error-shake 0.4s ease-out; }
 ```
 
 ### Hover Reveal Patterns
-Common hover interactions that add depth without heavy libraries.
-
 ```css
-/* Underline grow */
-.link-underline {
-  position: relative;
-  text-decoration: none;
-}
+.link-underline { position: relative; text-decoration: none; }
 .link-underline::after {
   content: '';
   position: absolute;
-  bottom: -2px; left: 0;
+  left: 0; bottom: -2px;
   width: 0; height: 2px;
   background: currentColor;
   transition: width 0.25s ease;
 }
 .link-underline:hover::after { width: 100%; }
-
-/* Card lift */
-.card-lift {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.card-lift:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
-}
-
-/* Image zoom on hover */
-.img-zoom { overflow: hidden; }
-.img-zoom img {
-  transition: transform 0.4s ease;
-}
-.img-zoom:hover img { transform: scale(1.06); }
 ```
 
 ---
 
 ## Typography Effects
 
-Type is a design element, not just content delivery. These effects use typography itself as the visual layer.
-
-> **Agent rule:** Typography effects only work when the typeface is strong. A weak font with a gradient fill is just a weak font with a gradient fill. Confirm the typeface is appropriate before adding effects.
+Typography can act as content, structure, and visual atmosphere simultaneously.
 
 ### Variable Font Animations
-- **What it is:** Variable fonts expose axes (weight, width, slant) that can be animated with CSS transitions. The result is type that morphs smoothly.
-- **Best for:** Interactive headlines, hover-reactive type, scroll-driven weight shifts.
-- **Requires:** A variable font with the relevant axis (check with `font-variation-settings`).
-
 ```css
 .variable-headline {
   font-family: 'Inter Variable', sans-serif;
   font-variation-settings: 'wght' 300;
   transition: font-variation-settings 0.3s ease;
 }
-
-.variable-headline:hover {
-  font-variation-settings: 'wght' 800;
-}
-
-/* Scroll-driven weight — pair with JS scroll listener */
-/* wght value maps from 300 (top of page) to 900 (bottom) */
+.variable-headline:hover { font-variation-settings: 'wght' 800; }
 ```
 
 ### Outlined / Stroke Text
-- **What it is:** Text with no fill, only a visible stroke outline. Creates a ghost-type effect that feels structural and bold without visual weight.
-- **Best for:** Background decorative type layers, oversized section labels, brutalist and editorial layouts.
-- **Avoid when:** Readability is the primary goal — stroke text is decoration, not content.
-
 ```css
-/* CSS stroke text */
 .text-outline {
   -webkit-text-stroke: 2px #0A0A0A;
   color: transparent;
   font-size: clamp(4rem, 10vw, 10rem);
   font-weight: 900;
-  line-height: 1;
-  letter-spacing: -0.02em;
-  user-select: none;
-}
-
-/* Stroke with hover fill */
-.text-outline-hover {
-  -webkit-text-stroke: 2px #D4AF37; /* Golden Obsession accent */
-  color: transparent;
-  transition: color 0.3s ease;
-}
-.text-outline-hover:hover {
-  color: #D4AF37;
 }
 ```
 
-### Oversized Display Type as Texture
-- **What it is:** Typography scaled so large it becomes a background element — text as pattern, not message.
-- **Best for:** Section backgrounds, hero decorative layers, editorial poster layouts.
-- **Technique:** Low opacity, large scale, `pointer-events: none`, positioned absolutely behind content.
-
+### Oversized Display Texture
 ```css
 .display-texture {
   position: absolute;
   font-size: clamp(8rem, 20vw, 20rem);
   font-weight: 900;
   opacity: 0.04;
-  white-space: nowrap;
   pointer-events: none;
   user-select: none;
-  letter-spacing: -0.05em;
-  line-height: 1;
-  z-index: 0;
 }
 ```
 
 ### Gradient Text Fill
 ```css
-/* Animated flowing gradient text */
 .gradient-text {
-  background: linear-gradient(
-    90deg,
-    #B8C0FF, #E7D8FF, #D6C6F7, #B8C0FF /* Dreamy Periwinkle — Soft Gradients */
-  );
+  background: linear-gradient(90deg, #B8C0FF, #E7D8FF, #D6C6F7, #B8C0FF);
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: gradient-flow 3s linear infinite;
 }
-
 @keyframes gradient-flow {
-  0%   { background-position: 0% center; }
+  0% { background-position: 0% center; }
   100% { background-position: 200% center; }
 }
 ```
 
-### Kinetic Typography Rules
-When type moves as a primary visual element (not just an entrance animation):
-- Speed must reflect brand energy: slow (0.8–1.2s) = premium/editorial; fast (0.2–0.4s) = tech/gaming
-- Never move more than one text element simultaneously in the viewport
-- Kinetic type needs breathing room — generous whitespace, minimal surrounding elements
-- Always loop cleanly or stop at a natural resting state
-
 ---
 
-## Depth & Shadow System
+## Icon & SVG Animation
 
-Shadow is not decoration — it is depth. A consistent shadow system makes a UI feel physically coherent rather than randomly layered.
+Animated icons are one of the most common product-level motion needs. They are small, expressive, and often lighter than full libraries.
 
-> **Agent rule:** Pick one shadow style per project (flat, elevated, or dramatic) and apply it at consistent scales. Never mix flat design with heavy drop shadows on adjacent elements.
+> **Agent rule:** Use icon animation for state change and delight, not constant decoration. Repeating icon loops become visual noise fast.
 
-### Elevation Scale
-Five levels cover all use cases. Map them to z-index levels too.
+### SVG Stroke Drawing
+Use for line illustrations, logo reveals, signatures, or checkmarks.
 
 ```css
-:root {
-  /* Level 0 — flat, no elevation */
-  --shadow-0: none;
+.path-draw {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  animation: draw 1.2s ease forwards;
+}
 
-  /* Level 1 — subtle, card resting */
-  --shadow-1: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
-
-  /* Level 2 — card hover, dropdown */
-  --shadow-2: 0 4px 12px rgba(0,0,0,0.10), 0 2px 4px rgba(0,0,0,0.06);
-
-  /* Level 3 — modal, overlay, popover */
-  --shadow-3: 0 8px 32px rgba(0,0,0,0.14), 0 4px 8px rgba(0,0,0,0.08);
-
-  /* Level 4 — floating action, full-screen modal */
-  --shadow-4: 0 20px 60px rgba(0,0,0,0.20), 0 8px 20px rgba(0,0,0,0.10);
+@keyframes draw {
+  to { stroke-dashoffset: 0; }
 }
 ```
 
-### Colored Shadows
-Colored shadows (matching the element color) feel more premium than grey shadows. Use on cards, buttons, and hero elements.
-
-```css
-/* Button with colored glow shadow */
-.button-glow {
-  background: #2A7AE8;
-  box-shadow: 0 8px 24px rgba(42, 122, 232, 0.4);
-}
-
-/* Accent card with tinted shadow */
-.card-tinted-shadow {
-  background: #1A0A1E; /* Velvet Crypt — Gothic */
-  box-shadow: 0 12px 40px rgba(200, 160, 224, 0.2); /* accent color tinted */
-}
+### Animated Checkmark
+```svg
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+  <circle cx="32" cy="32" r="30" stroke="#1A8A40" stroke-width="4" class="path-draw" />
+  <path d="M18 33L28 43L46 23" stroke="#1A8A40" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="path-draw" />
+</svg>
 ```
 
-### box-shadow vs. filter: drop-shadow()
+### Lottie
+- **What it is:** JSON-based vector animation format exported from After Effects, rendered with a lightweight player.
+- **Best for:** Product onboarding, illustration loops, empty states, success states, branded explainer moments.
+- **Avoid when:** A simple SVG or CSS animation would do — Lottie is for richer illustration motion, not basic hover states.
 
-| Use | When |
-|---|---|
-| `box-shadow` | Rectangular elements, cards, buttons — follows the border-box |
-| `filter: drop-shadow()` | SVGs, PNGs with transparency, irregular shapes — follows the pixel alpha |
-| `text-shadow` | Type only, lightweight, no blur radius above 4px |
+```tsx
+import Lottie from 'lottie-react'
+import successAnimation from './success.json'
 
-```css
-/* drop-shadow on an SVG icon (follows the icon shape, not its bounding box) */
-.icon-shadow {
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
-}
+<Lottie animationData={successAnimation} loop={false} />
 ```
 
 ---
 
-## Border & Glow Effects
+## Cursor Effects
 
-Borders and outlines as active design elements — not just structural dividers.
+Cursor design is a high-personality layer. It is powerful in portfolios and brand experiences, but often wrong for product UI.
 
-> **Agent rule:** Gradient borders and glow effects are accent moments. Never apply to every card or element — reserve for 1–2 hero elements per section.
+> **Agent rule:** Cursor effects are desktop-only enhancements. Never rely on them for meaning, affordance, or navigation.
 
-### Gradient Border
-CSS doesn't support `border-image` with `border-radius` directly. Use the pseudo-element technique.
+### Custom Cursor Dot
+```css
+.custom-cursor {
+  position: fixed;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #D4AF37;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+}
+```
+
+```tsx
+useEffect(() => {
+  const move = (e: MouseEvent) => {
+    if (cursorRef.current) {
+      cursorRef.current.style.left = `${e.clientX}px`
+      cursorRef.current.style.top = `${e.clientY}px`
+    }
+  }
+  window.addEventListener('mousemove', move)
+  return () => window.removeEventListener('mousemove', move)
+}, [])
+```
+
+### Crosshair / Precision Cursor
+- **Best for:** Portfolios, photography sites, creative tools, premium product showcases.
+- **Avoid when:** The UI is task-heavy or cursor replacement would hurt familiarity.
+
+---
+
+## Image & Media Effects
+
+Images often need motion more than text does. Image treatment defines brand polish quickly.
+
+### Mask Reveal on Scroll
+Use clip-path or transform-based reveals to make media enter elegantly.
 
 ```css
-/* Gradient border with border-radius */
-.gradient-border {
+.image-reveal {
+  clip-path: inset(0 100% 0 0);
+  animation: reveal 0.8s ease-out forwards;
+}
+
+@keyframes reveal {
+  to { clip-path: inset(0 0 0 0); }
+}
+```
+
+### Image Zoom + Overlay
+```css
+.media-card {
   position: relative;
-  background: #0A0C10; /* Midnight Frag primary — Gaming */
-  border-radius: 12px;
-  padding: 1px; /* controls border thickness */
+  overflow: hidden;
 }
-
-.gradient-border::before {
+.media-card img {
+  transition: transform 0.5s ease;
+}
+.media-card::after {
   content: '';
   position: absolute;
   inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(135deg, #00E5FF, #006080, #3C1A47);
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
+  background: linear-gradient(to top, rgba(0,0,0,0.45), rgba(0,0,0,0));
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
-
-.gradient-border__inner {
-  background: #0A0C10;
-  border-radius: 11px;
-  padding: 24px;
-}
+.media-card:hover img { transform: scale(1.06); }
+.media-card:hover::after { opacity: 1; }
 ```
 
-### Animated Glow / Neon Border
+### Grain / Noise Texture
+Grain adds tactility to flat backgrounds, gradients, glass, and editorial layouts.
+
 ```css
-/* Pulsing neon glow — Gaming / Esports */
-@keyframes glow-pulse {
-  0%, 100% { box-shadow: 0 0 8px #00E5FF, 0 0 20px rgba(0, 229, 255, 0.4); }
-  50%       { box-shadow: 0 0 16px #00E5FF, 0 0 40px rgba(0, 229, 255, 0.6); }
-}
-
-.neon-card {
-  border: 1px solid #00E5FF;
-  border-radius: 8px;
-  animation: glow-pulse 2s ease-in-out infinite;
-}
-
-/* Rotating gradient border animation */
-@keyframes border-spin {
-  0%   { --border-angle: 0deg; }
-  100% { --border-angle: 360deg; }
-}
-
-@property --border-angle {
-  syntax: '<angle>';
-  initial-value: 0deg;
-  inherits: false;
-}
-
-.spinning-border {
-  border: 2px solid transparent;
-  border-radius: 12px;
-  background:
-    linear-gradient(#0A0C10, #0A0C10) padding-box,
-    conic-gradient(from var(--border-angle), #00E5FF, #3C1A47, #B6FF00, #00E5FF) border-box;
-  animation: border-spin 3s linear infinite;
+.grain-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.08;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.4) 0.5px, transparent 0.5px),
+    radial-gradient(circle at 80% 80%, rgba(0,0,0,0.4) 0.5px, transparent 0.5px);
+  background-size: 4px 4px;
+  mix-blend-mode: overlay;
 }
 ```
 
-### Subtle Glow on Hover (Premium)
+### Blend Mode Layer
 ```css
-.card-hover-glow {
-  transition: box-shadow 0.3s ease;
-}
-
-.card-hover-glow:hover {
-  box-shadow:
-    0 0 0 1px rgba(212, 175, 55, 0.3),  /* Golden Obsession accent */
-    0 8px 32px rgba(212, 175, 55, 0.15);
+.blend-accent {
+  mix-blend-mode: screen;
+  opacity: 0.7;
 }
 ```
+
+---
+
+## Easing & Spring Reference
+
+Motion feel matters as much as motion type. Picking the wrong easing curve can make premium UI feel cheap.
+
+| Feel | Use | Timing |
+|---|---|---|
+| **Ease-out** | Most UI entrances, hover lifts, content reveal | 180–300ms |
+| **Ease-in-out** | Balanced loop, subtle transitions, panels | 250–400ms |
+| **Linear** | Marquee, progress bars, background loops | continuous |
+| **Spring** | Physical cards, toggles, playful elements | tuned by stiffness/damping |
+| **Sharp / snap** | Brutalist interactions, crisp tool UIs | 100–180ms |
+
+### Recommended cubic-bezier curves
+```css
+/* Premium smooth */
+--ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+
+/* Soft standard UI */
+--ease-soft: cubic-bezier(0.25, 0.1, 0.25, 1);
+
+/* Snappy brutal / tool UI */
+--ease-snap: cubic-bezier(0.2, 0.8, 0.2, 1);
+```
+
+### Spring guidance
+- Use springs for drag, toggles, cards, cursors, and playful UI.
+- Avoid springs for text readability reveals and dense dashboard transitions.
+- High stiffness + low damping = energetic / playful.
+- Medium stiffness + medium damping = premium / calm.
 
 ---
 
 ## Motion & Scroll
 
-Scroll-triggered animations and transitions. These guide attention rather than demand it.
-
-> **Agent rule:** Scroll animations must use ease-out curves and short durations (200–400ms). Never block content visibility — always animate from visible-enough to fully visible, never from invisible.
-
-### ScrollReveal (ReactBits)
-- **Source:** [ReactBits](https://reactbits.dev/animations/scroll-reveal) — MIT
-- **What it is:** Elements fade and slide into view as they enter the viewport.
-- **Best for:** Content sections, feature grids, testimonials.
-- **Install:** `npx shadcn@latest add @react-bits/ScrollReveal-TS-TW`
-
-### FadeContent (ReactBits)
-- **Source:** [ReactBits](https://reactbits.dev/animations/fade-content) — MIT
-- **What it is:** Simple opacity fade-in. Minimal and universal.
-- **Best for:** Editorial content, long-form pages, documentation.
-- **Install:** `npx shadcn@latest add @react-bits/FadeContent-TS-TW`
-
-### Stagger Animation
-Animate a list or grid where each item enters with a delay offset. Creates a cascade effect.
+### ScrollReveal
+- Use IntersectionObserver for performant viewport-driven reveals when libraries are unnecessary.
 
 ```tsx
-// Stagger with CSS custom property delay
-{items.map((item, i) => (
-  <div
-    key={item.id}
-    className="stagger-item"
-    style={{ '--delay': `${i * 80}ms` } as React.CSSProperties}
-  >
-    {item.content}
-  </div>
-))}
+useEffect(() => {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) entry.target.classList.add('in-view')
+    })
+  }, { threshold: 0.2 })
+
+  document.querySelectorAll('.reveal').forEach((el) => observer.observe(el))
+  return () => observer.disconnect()
+}, [])
 ```
 
 ```css
-.stagger-item {
+.reveal {
   opacity: 0;
-  transform: translateY(16px);
-  animation: stagger-in 0.4s ease-out var(--delay, 0ms) forwards;
+  transform: translateY(20px);
+  transition: opacity 0.5s var(--ease-premium), transform 0.5s var(--ease-premium);
 }
-
-@keyframes stagger-in {
-  to { opacity: 1; transform: translateY(0); }
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
 }
 ```
 
-### Parallax Scroll
-Background moves at a different speed to foreground, creating depth.
+### CSS Scroll-Driven Animations
+Use the native scroll timeline API when supported.
 
 ```css
-/* CSS-only parallax (limited but zero JS) */
+@supports (animation-timeline: scroll()) {
+  .scroll-progress {
+    animation: grow linear both;
+    animation-timeline: scroll();
+    animation-range: 0% 100%;
+    transform-origin: left center;
+  }
+
+  @keyframes grow {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+}
+```
+
+### Parallax
+```css
 .parallax-section {
   background-attachment: fixed;
   background-position: center;
@@ -727,28 +565,10 @@ Background moves at a different speed to foreground, creating depth.
 }
 ```
 
-```tsx
-// JS parallax with scroll listener
-useEffect(() => {
-  const handleScroll = () => {
-    const y = window.scrollY
-    if (bgRef.current) {
-      bgRef.current.style.transform = `translateY(${y * 0.4}px)`
-    }
-  }
-  window.addEventListener('scroll', handleScroll, { passive: true })
-  return () => window.removeEventListener('scroll', handleScroll)
-}, [])
-```
-
 ### Page Transitions
-Route-level transitions in React. Use Framer Motion's `AnimatePresence` for the cleanest implementation.
-
 ```tsx
 import { AnimatePresence, motion } from 'framer-motion'
-// install: npm i framer-motion
 
-// Wrap router outlet with AnimatePresence
 <AnimatePresence mode="wait">
   <motion.div
     key={location.pathname}
@@ -762,29 +582,11 @@ import { AnimatePresence, motion } from 'framer-motion'
 </AnimatePresence>
 ```
 
-### GlitchText (ReactBits)
-- **Source:** [ReactBits](https://reactbits.dev/text-animations/glitch) — MIT
-- **What it is:** Glitch/distortion effect on text. Cyberpunk aesthetic.
-- **Best for:** Gaming, esports, hacker aesthetic.
-- **Avoid when:** Professional, wellness, or corporate contexts.
-- **Color pairing:** Otherworldly, Acid Contemporary, Gaming/Esports palettes.
-- **Install:** `npx shadcn@latest add @react-bits/GlitchText-TS-TW`
-
 ---
 
 ## Animated Backgrounds
 
-Use for hero sections, full-page backgrounds, and section transitions. Choose based on performance budget and brand mood.
-
-> **Agent rule:** One animated background per page. Do not stack two animated backgrounds.
-
 ### ShaderGradient
-- **Source:** [@shadergradient/react](https://github.com/ruucm/shadergradient) — MIT
-- **What it is:** 3D animated mesh gradient via WebGL/Three.js.
-- **Best for:** AI/tech SaaS hero sections, premium landing pages.
-- **Avoid when:** Performance is constrained or users are on low-end mobile.
-- **Install:** `npm i @shadergradient/react @react-three/fiber three three-stdlib camera-controls`
-
 ```tsx
 import { ShaderGradientCanvas, ShaderGradient } from '@shadergradient/react'
 
@@ -792,274 +594,157 @@ export function HeroBackground() {
   return (
     <ShaderGradientCanvas style={{ position: 'absolute', inset: 0 }} pixelDensity={1.5} fov={45}>
       <ShaderGradient
-        type="waterPlane" animate="on"
-        uSpeed={0.3} uStrength={3} uDensity={1.2}
-        color1="#B8C0FF" color2="#E7D8FF" color3="#1A0A1E"
-        lightType="3d" brightness={1.2} grain="on"
+        type="waterPlane"
+        animate="on"
+        uSpeed={0.3}
+        uStrength={3}
+        uDensity={1.2}
+        color1="#B8C0FF"
+        color2="#E7D8FF"
+        color3="#1A0A1E"
+        lightType="3d"
+        brightness={1.2}
+        grain="on"
       />
     </ShaderGradientCanvas>
   )
 }
 ```
 
-**Mobile fallback:**
+### Other background types
+- **Aurora** — calm, premium, wellness-friendly.
+- **Particles / Orbs** — AI, tech, dark UI hero sections.
+- **Hyperspeed** — gaming and cinematic launch moments only.
+- **Ballpit** — playful, youthful products.
+- **DotGrid** — SaaS, tools, understated structure.
+- **Waves** — fintech, wellness, tropical softness.
+
+---
+
+## UI Motion Patterns
+
+These are the bread-and-butter patterns of modern UI transitions.
+
+### Tooltip Entrance
 ```css
-.hero-bg-fallback { background: linear-gradient(135deg, #B8C0FF 0%, #E7D8FF 100%); }
+.tooltip {
+  opacity: 0;
+  transform: translateY(4px) scale(0.98);
+  transition: opacity 0.16s var(--ease-soft), transform 0.16s var(--ease-soft);
+}
+.tooltip[data-open="true"] {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
 ```
 
-### ShaderGradient Palette Recipes
-
-| Palette (color-combo-skill) | color1 | color2 | color3 | Mood |
-|---|---|---|---|---|
-| Dreamy Periwinkle | `#B8C0FF` | `#E7D8FF` | `#2D4275` | Soft, digital-premium |
-| Golden Obsession | `#D4AF37` | `#1C1A17` | `#B87333` | Opulent, dark luxury |
-| Neon Abyss | `#3C1A47` | `#B6FF00` | `#1A0828` | Electric, surreal |
-| Midnight Frag | `#00E5FF` | `#0A0C10` | `#1A1E28` | Gaming, high-focus |
-| Clinical Clarity | `#D0E8F0` | `#F7FAFB` | `#0A7A8A` | Clean, medical |
-| Eucalyptus Glow | `#A7C4A0` | `#F4EFE6` | `#4E6B45` | Organic, wellness |
-
-### Aurora (ReactBits)
-- **What it is:** Soft animated aurora gradient. Lightweight CSS/canvas.
-- **Best for:** Wellness, premium SaaS, calm editorial.
-- **Install:** `npx shadcn@latest add @react-bits/Aurora-TS-TW`
-
-### Particles / Orbs (ReactBits)
-- **What it is:** Floating particles or glowing orbs.
-- **Best for:** Tech, AI, dark UI hero sections.
-- **Install:** `npx shadcn@latest add @react-bits/Particles-TS-TW`
-
-### Hyperspeed (ReactBits)
-- **What it is:** Star-warp tunnel speed effect.
-- **Best for:** Gaming, esports, launch pages.
-- **Avoid when:** Sustained readability is needed — this is a moment, not a surface.
-- **Install:** `npx shadcn@latest add @react-bits/Hyperspeed-TS-TW`
-
-### Ballpit (ReactBits)
-- **What it is:** Physics-based 3D bouncing balls.
-- **Best for:** Playful SaaS, gaming, youthful consumer products.
-- **Install:** `npx shadcn@latest add @react-bits/Ballpit-TS-TW`
-
-### Dot Matrix / Grid (ReactBits)
-- **What it is:** Subtle animated dot or grid pattern.
-- **Best for:** SaaS, developer tools, corporate digital.
-- **Install:** `npx shadcn@latest add @react-bits/DotGrid-TS-TW`
-
-### Waves (ReactBits)
-- **What it is:** Animated SVG/canvas wave pattern.
-- **Best for:** Wellness, fintech, clean section dividers.
-- **Install:** `npx shadcn@latest add @react-bits/Waves-TS-TW`
-
----
-
-## Text Animations
-
-For headlines, hero text, and key callouts only. Never on body copy.
-
-> **Agent rule:** One text animation per view. Two animated text elements in the same viewport is one too many.
-
-### BlurText (ReactBits)
-- **What it is:** Text unblurs into focus word by word.
-- **Best for:** Hero headlines, premium reveals.
-- **Install:** `npx shadcn@latest add @react-bits/BlurText-TS-TW`
-
-```tsx
-<BlurText text="Design that speaks." delay={150} animateBy="words" direction="top" className="text-5xl font-bold" />
+### Dropdown Menu
+```css
+.dropdown {
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.18s var(--ease-soft), transform 0.18s var(--ease-soft);
+}
+.dropdown[data-open="true"] {
+  opacity: 1;
+  transform: translateY(0);
+}
 ```
 
-### SplitText (ReactBits)
-- **What it is:** Characters/words animate in with spring physics.
-- **Best for:** Bold editorial headlines, brand moments.
-- **Install:** `npx shadcn@latest add @react-bits/SplitText-TS-TW`
-
-### ShinyText (ReactBits)
-- **What it is:** Animated shine sweep. Lightweight CSS.
-- **Best for:** Badges, "New" labels, premium callouts.
-- **Install:** `npx shadcn@latest add @react-bits/ShinyText-TS-TW`
-
-### GradientText (ReactBits)
-- **What it is:** Animated gradient fill on text.
-- **Best for:** AI headlines, tech SaaS hero text.
-- **Color pairing:** Otherworldly or Soft Gradients palettes.
-- **Install:** `npx shadcn@latest add @react-bits/GradientText-TS-TW`
-
-### CountUp (ReactBits)
-- **What it is:** Animated scroll-triggered number counter.
-- **Best for:** Stats, metrics, social proof.
-- **Install:** `npx shadcn@latest add @react-bits/CountUp-TS-TW`
-
-### RotatingText (ReactBits)
-- **What it is:** Cycles through a word list in one text slot.
-- **Best for:** Hero taglines with multiple value props.
-- **Avoid when:** More than 4–5 words — users lose track.
-- **Install:** `npx shadcn@latest add @react-bits/RotatingText-TS-TW`
-
-### TrueFocus / TextPressure (ReactBits)
-- **What it is:** Interactive text reacting to cursor proximity.
-- **Best for:** Portfolio heroes, creative agency pages.
-- **Avoid when:** Mobile-first contexts.
-- **Install:** `npx shadcn@latest add @react-bits/TrueFocus-TS-TW`
-
----
-
-## UI Components
-
-### SpotlightCard (ReactBits)
-- **What it is:** Radial spotlight that follows cursor on a card.
-- **Best for:** Feature cards, pricing tiers, dark UI.
-- **Install:** `npx shadcn@latest add @react-bits/SpotlightCard-TS-TW`
-
-### TiltCard (ReactBits)
-- **What it is:** Card tilts in 3D on hover.
-- **Best for:** Product cards, portfolio, collectibles.
-- **Avoid when:** `prefers-reduced-motion` — can cause motion sickness.
-- **Install:** `npx shadcn@latest add @react-bits/Tilt-TS-TW`
-
-### Magnet (ReactBits)
-- **What it is:** Element magnetically attracts toward cursor.
-- **Best for:** CTAs, social links, playful moments.
-- **Install:** `npx shadcn@latest add @react-bits/Magnet-TS-TW`
-
-### PixelCard (ReactBits)
-- **What it is:** Pixel-scatter animation on hover.
-- **Best for:** Gaming, retro aesthetic, creative portfolios.
-- **Install:** `npx shadcn@latest add @react-bits/PixelCard-TS-TW`
-
-### StarBorder (ReactBits)
-- **What it is:** Animated star/sparkle orbiting the element border.
-- **Best for:** Featured items, premium badges, CTAs.
-- **Install:** `npx shadcn@latest add @react-bits/StarBorder-TS-TW`
-
-### RippleButton (ReactBits)
-- **What it is:** Material-style ripple effect on click.
-- **Best for:** Consumer apps, mobile-first UI, action feedback.
-- **Install:** `npx shadcn@latest add @react-bits/RippleButton-TS-TW`
-
-### AnimatedList (ReactBits)
-- **What it is:** List items animate in with spring stagger.
-- **Best for:** Notification feeds, activity logs, dynamic lists.
-- **Install:** `npx shadcn@latest add @react-bits/AnimatedList-TS-TW`
-
-### Dock (ReactBits)
-- **What it is:** macOS-style magnifying dock navigation.
-- **Best for:** App-style interfaces, portfolio navigation, creative tools.
-- **Install:** `npx shadcn@latest add @react-bits/Dock-TS-TW`
+### Drawer / Sheet
+```css
+.drawer {
+  transform: translateX(100%);
+  transition: transform 0.28s var(--ease-premium);
+}
+.drawer[data-open="true"] {
+  transform: translateX(0);
+}
+```
 
 ---
 
 ## Layout Patterns
 
-Not just grids — visual layout systems that carry their own aesthetic meaning.
-
 ### Bento Grid
-- **What it is:** An asymmetric grid of cards at different sizes (1×1, 1×2, 2×1, 2×2) arranged to create visual hierarchy and rhythm. Each card features a different content type.
-- **Best for:** SaaS feature sections, portfolio overview, product landing pages, app store screenshots.
-- **Avoid when:** The content items are uniform — bento only works when cards have genuinely different weights and story.
-- **Color pairing:** Works with any palette — use the grid background as the base color and each card as a surface variant.
-
 ```css
 .bento-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: auto;
   gap: 16px;
 }
+.bento-1x1 { grid-column: span 1; }
+.bento-2x1 { grid-column: span 2; }
+.bento-1x2 { grid-column: span 1; }
+.bento-2x2 { grid-column: span 2; }
+```
 
-/* Size variants */
-.bento-1x1 { grid-column: span 1; grid-row: span 1; }
-.bento-2x1 { grid-column: span 2; grid-row: span 1; }
-.bento-1x2 { grid-column: span 1; grid-row: span 2; }
-.bento-2x2 { grid-column: span 2; grid-row: span 2; }
+### Scroll Snap Gallery
+Use for full-screen stories, product showcases, and horizontal feature tours.
 
-/* Responsive collapse */
-@media (max-width: 768px) {
-  .bento-grid { grid-template-columns: repeat(2, 1fr); }
-  .bento-2x2 { grid-column: span 2; }
-  .bento-2x1 { grid-column: span 2; }
+```css
+.snap-x {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+}
+.snap-item {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
 }
 ```
 
-**Bento hierarchy rule:** The largest card (2×2) must contain the most important or most visually rich content. Never waste the biggest slot on supporting information.
+### Sticky Hero Anatomy
+A premium landing page often uses:
+- Sticky hero copy
+- Scrolling visual panel
+- Parallax or reveal behind it
+- Single primary CTA and one secondary CTA
 
-### Infinite Scroll / Marquee (ReactBits)
-- **What it is:** Continuously scrolling horizontal or vertical ticker — logos, testimonials, tags.
-- **Best for:** Social proof logo strips, testimonial streams, tag clouds, brand partner sections.
-- **Avoid when:** The content requires the user to read and act — marquees are for passive exposure, not interactive content.
-- **Install:** `npx shadcn@latest add @react-bits/InfiniteScroll-TS-TW`
-
+### Infinite Scroll / Marquee
 ```css
-/* Pure CSS marquee fallback */
 .marquee-track {
   display: flex;
   width: max-content;
   animation: marquee 20s linear infinite;
 }
-
 @keyframes marquee {
   from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  to { transform: translateX(-50%); }
 }
-
-/* Pause on hover */
-.marquee-track:hover { animation-play-state: paused; }
 ```
-
-### CircularGallery (ReactBits)
-- **What it is:** Images or cards arranged in an interactive rotating circular track.
-- **Best for:** Portfolio showcases, product galleries, team pages, creative brand moments.
-- **Install:** `npx shadcn@latest add @react-bits/CircularGallery-TS-TW`
 
 ---
 
-## Liquid & Glass FX
+## Dark Mode Adaptations
 
-High-impact organic effects. Statement moments — use once per project.
+Effects need different tuning in dark UI.
 
-> **Agent rule:** Liquid and glass effects are brand moments, not layout patterns. One use per project maximum.
+- Shadows should be weaker; use glow or border contrast instead.
+- Glass opacity should increase slightly in dark mode for readability.
+- Gradient borders need less saturation and lower luminance contrast.
+- Grain works better at lower opacity in dark mode.
+- White text on animated backgrounds needs a dark overlay or scrim.
 
-### liquid-logo (paper-design)
-- **Source:** [liquid-logo](https://github.com/paper-design/liquid-logo) — MIT
-- **What it is:** Animated liquid morphing applied to a logo or SVG path.
-- **Best for:** Hero logo reveals, premium product launches.
-- **Avoid when:** Logo must stay static and recognizable at all times.
+```css
+.dark .glass-card {
+  background: rgba(10, 12, 16, 0.45);
+  border-color: rgba(255, 255, 255, 0.08);
+}
 
-```tsx
-import { LiquidLogo } from '@paper-design/liquid-logo'
-// install: npm i @paper-design/liquid-logo
-
-<LiquidLogo src="/logo.svg" speed={0.8} color="#D4AF37" />
-```
-
-### liquid-glass-js (dashersw)
-- **Source:** [liquid-glass-js](https://github.com/dashersw/liquid-glass-js) — MIT
-- **What it is:** Apple visionOS-inspired distortion + refraction shader on any DOM element.
-- **Best for:** Premium hero UI, modal overlays, Apple-ecosystem product pages.
-- **Avoid when:** Performance is tight or brand is not in the premium/Apple-adjacent space.
-
-```tsx
-import { LiquidGlass } from 'liquid-glass-js'
-// install: npm i liquid-glass-js
-
-<LiquidGlass>
-  <div className="p-8"><h2>Premium feature</h2></div>
-</LiquidGlass>
+.dark .card-shadow {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
 ```
 
 ---
 
 ## 3D in UI
 
-> **Agent rule:** Only suggest R3F when the brief explicitly requires 3D depth. Never default to R3F when ShaderGradient or CSS achieves the same result.
-
 ### react-three-fiber
-- **Source:** [react-three-fiber](https://github.com/pmndrs/react-three-fiber) — MIT
-- **What it is:** React renderer for Three.js.
-- **Best for:** 3D product viewers, abstract 3D hero sections, interactive data visualizations.
-- **Bundle note:** Three.js is ~600KB. Always code-split and lazy-load.
-
 ```tsx
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, MeshDistortMaterial } from '@react-three/drei'
-// install: npm i @react-three/fiber @react-three/drei three
 
 export function Hero3D() {
   return (
@@ -1082,45 +767,38 @@ export function Hero3D() {
 
 | Tier | Effects | When to use |
 |---|---|---|
-| **Lightweight** | CSS animations, ShinyText, CountUp, FadeContent, DotGrid, Skeleton, Hover states, Gradient borders | Any project, including mobile-first |
-| **Medium** | Aurora, Waves, BlurText, SplitText, SpotlightCard, ShaderGradient, Stagger, Page transitions | Controlled bundle size, modern device targets |
-| **Heavy** | Ballpit, Hyperspeed, Particles, liquid-glass-js, TiltCard, Variable font animation | Landing pages, portfolio, launch pages — not product UI |
-| **Maximum** | react-three-fiber, liquid-logo with complex SVG | Hero-only, code-split, static fallback mandatory |
+| **Lightweight** | CSS transitions, simple keyframes, hover states, tooltip/dropdown motion, stroke SVG animation, DotGrid | Any project |
+| **Medium** | Aurora, BlurText, SplitText, ShaderGradient, IntersectionObserver reveals, Bento, scroll snap | Modern products with controlled bundle size |
+| **Heavy** | Ballpit, Hyperspeed, Particles, Lottie, liquid-glass-js, custom cursors, variable font motion | Landing pages, creative work, launches |
+| **Maximum** | react-three-fiber, liquid-logo with complex SVG, stacked hero effects | Hero-only, code-split, fallback mandatory |
 
 ---
 
 ## Accessibility Rules
 
-- **Always respect `prefers-reduced-motion`.** Fall back to static content for all animations.
-- **Neumorphism requires a contrast audit.** It almost always fails WCAG — verify before shipping.
-- **Never animate body text** — headlines and decorative elements only.
-- **Contrast applies at every frame.** Animated text must pass WCAG at every point in the animation.
-- **Don't rely on motion to convey meaning** — content must work with animation disabled.
-- **Focus states are non-negotiable.** Every interactive element needs a visible `:focus-visible` style.
+- Respect `prefers-reduced-motion` for all animated systems.
+- Do not rely on cursor effects for meaning.
+- Neumorphism requires a contrast audit.
+- Animated text must remain readable at every frame.
+- Every interactive element needs visible `:focus-visible` states.
+- Tooltip, dropdown, and drawer motion must not delay usability.
 
 ```tsx
-const prefersReducedMotion =
-  window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
-{prefersReducedMotion ? <h1>{text}</h1> : <BlurText text={text} />}
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 ```
 
 ---
 
 ## Color Bridge
 
-This skill works alongside [color-combo-skill](https://github.com/bilioveloso/color-combo-skill). Always source colors from a named palette.
+Use [color-combo-skill](https://github.com/bilioveloso/color-combo-skill) for all color decisions.
 
-| Effect context | Recommended palette |
+| Context | Recommended palette |
 |---|---|
-| AI/tech SaaS hero with ShaderGradient | Otherworldly or Soft Gradients |
-| Dark gaming hero with Hyperspeed or Particles | Gaming / Esports |
-| Premium brand hero with liquid-logo | Luxury |
-| Wellness app with Aurora or Waves | Soft Gradients or Nature / Organic |
-| Corporate dashboard with DotGrid | Corporate / Enterprise |
-| Gothic editorial with shader or glass | Gothic / Dark Romance |
-| Playful consumer with Ballpit or Claymorphism | Acid Contemporary or Warm Tropical / Resort |
-| Brutalist developer tool | Acid Contemporary (black + electric yellow) |
-| Neumorphic wellness app | Minimalist (Warm Mono) or soft Healthcare palettes |
-| Bento grid SaaS section | Corporate / Enterprise or Luxury Facade |
-| Animated gradient border on dark UI | Gaming / Esports or Otherworldly |
+| Premium glass hero | Luxury or Soft Gradients |
+| Brutalist developer tool | Acid Contemporary |
+| Claymorphic consumer app | Warm Tropical / Resort or Soft Gradients |
+| Gaming glow borders | Gaming / Esports or Otherworldly |
+| Wellness aurora layout | Nature / Organic or Healthcare |
+| Dark editorial grain and glass | Gothic / Dark Romance |
+| Corporate motion dashboard | Corporate / Enterprise |
