@@ -1189,3 +1189,63 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 ```
 
 **Checklist:** ☐ Intersection Observer API · ☐ will-change: transform (not layout props) · ☐ Stagger children 30–50ms · ☐ prefers-reduced-motion respected · ☐ GPU-accelerated (transform/opacity only) · ☐ Entry animation ease-out, exit ease-in
+
+## Universal Animation Baseline
+
+Style-specific timings appear above. These are the **platform-agnostic defaults** —
+apply them unless the page-type recipe overrides.
+
+### Duration table
+
+Cross-design-system convergence point: **150 ms** is the default state-confirmation
+duration. Material 3 `short3`, IBM Carbon `moderate-01`, Shopify Polaris `150`,
+Tailwind default, Salesforce SLDS `duration-fast` all land here independently.
+
+| Duration | Use |
+|---|---|
+| 50–100 ms | Instant feedback: button press, toggle commit, hover state |
+| **150 ms** | Default state-confirmation (selection, chip, tab change) |
+| 200–300 ms | UI entering view: modals, dropdowns, sheets |
+| 300–500 ms | Cross-screen transitions, container morphs |
+| > 500 ms | Reserved for platform-native staged sequences only |
+
+Non-navigation microinteractions must stay under 500 ms. Frequent animations
+(a hover seen 50+ times per session) should stay ≤ 200 ms.
+
+### Curve vs spring
+
+Choose based on what's moving, not on feel:
+
+| Property | Use | Why |
+|---|---|---|
+| `opacity`, `color`, `background` | **Curve** (cubic-bezier) | Value interpolates between two known states |
+| `transform: translate/scale/rotate` | **Spring** | Should feel physical — needs inertia and overshoot |
+| `width`, `height` | Avoid animating — use `transform: scale` instead | Triggers layout reflow |
+
+Material 3 standard curve: `cubic-bezier(0.2, 0, 0, 1)` — front-loaded, snappy arrival.
+M2 curve `cubic-bezier(0.4, 0, 0.2, 1)` is legacy; don't label it M3.
+
+### Reduced motion
+
+Every translate, scale, rotate, or parallax animation must respect the media query:
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  /* strip motion-on-axis; substitute opacity/color crossfades for state changes */
+  .animated { transition: opacity 150ms ease; transform: none !important; }
+}
+```
+
+Strip positional motion; keep opacity/color crossfades so state changes remain
+perceivable. The View Transitions API does **not** apply this automatically — add
+the override explicitly.
+
+### Common mistakes
+
+- Animation as the only signal of a state change — pair with a static affordance
+  (colour, label, position) so reduced-motion users aren't left blind.
+- Curve on `transform: scale` that should feel physical — use a spring.
+- Hero choreography in productivity tools — motion budget belongs on functional
+  micro-feedback inside the product, not landing-page sequences.
+- Looping ambient motion without a pause control — WCAG 2.2.2 (Level A) requires
+  a pause mechanism for any motion running longer than 5 seconds.
